@@ -1,3 +1,36 @@
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
 <body>
-    <h1>Hello World</h1>
+    <py-script>
+        <script>
+            var x = document.getElementById("myDIV");
+            x.style.display = "none";
+        </script>
+    </py-script>
+    <div id="myDIV">
+        <p>I am a paragraph.</p>
+    </div>
+    <button onclick="myFunction()">Try it</button>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 </body>

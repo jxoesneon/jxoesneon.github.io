@@ -118,12 +118,13 @@ const AIChat = () => {
 
             } catch (error) {
                 // If we have retries left and it's a likely temporary error (429/503)
-                if (attempts < 2 && (error.message?.includes('429') || error.message?.includes('503'))) {
+                // Retry up to 3 times (Total wait ~9s + execution time > 10s)
+                if (attempts < 3 && (error.message?.includes('429') || error.message?.includes('503'))) {
                     console.warn(`Retry attempt ${attempts + 1}: Reducing context to ${Math.floor(contextLimit / 2)}`);
-                    setLoadingStatus(`Traffic high... Optimizing context (${attempts + 1}/2)...`);
+                    setLoadingStatus(`Optimizing signal (Attempt ${attempts + 1}/3)...`);
                     
-                    // Wait 2 seconds before retry
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // Wait 3 seconds before retry
+                    await new Promise(resolve => setTimeout(resolve, 3000));
                     
                     // Retry with half the context
                     return callGeminiWithRetry(Math.floor(contextLimit / 2), attempts + 1);
@@ -143,10 +144,9 @@ const AIChat = () => {
             console.error("AI Error:", error);
             let errorMessage = "Error: Connection interrupted. Please try again.";
             
-            if (error.message?.includes('429')) {
-                errorMessage = "Error: High traffic (Rate Limit). Please wait a moment.";
-            } else if (error.message?.includes('503')) {
-                errorMessage = "Error: AI Service temporarily overloaded. Try again soon.";
+            if (error.message?.includes('429') || error.message?.includes('503')) {
+                // Friendly Fallback for Rate Limits
+                errorMessage = "My neural link is currently at max capacity with incoming signals! 🧠✨ \n\nWhile I re-calibrate my processors, I invite you to explore the [Experience Timeline](#experience) or check out the full source code on [GitHub](https://github.com/jxoesneon).";
             }
 
             setMessages(prev => [...prev, { role: 'model', text: errorMessage }]);

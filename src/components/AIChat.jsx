@@ -72,18 +72,28 @@ const AIChat = () => {
             const genAI = new GoogleGenerativeAI(API_KEY);
             const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
             
-            const chat = model.startChat({
-                history: [
-                    {
-                        role: "user",
-                        parts: [{ text: SYSTEM_PROMPT }],
-                    },
-                    {
-                        role: "model",
-                        parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }],
-                    }
-                ],
+            // Reconstruct history from state to maintain context
+            // Skip the first message if it's the initial "Systems online" greeting from the UI
+            const history = [
+                {
+                    role: "user",
+                    parts: [{ text: SYSTEM_PROMPT }],
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }],
+                }
+            ];
+
+            // Append previous conversation from state (skipping the very first default message)
+            messages.slice(1).forEach(msg => {
+                history.push({
+                    role: msg.role === 'user' ? 'user' : 'model',
+                    parts: [{ text: msg.text }]
+                });
             });
+
+            const chat = model.startChat({ history });
 
             const result = await chat.sendMessage(userMessage);
             const response = result.response.text();

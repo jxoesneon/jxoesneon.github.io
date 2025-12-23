@@ -133,29 +133,61 @@ const AIChat = () => {
                         className="fixed bottom-24 right-6 z-50 w-[350px] md:w-[400px] h-[500px] bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                     >
                         {/* Header */}
-                        <div className="p-4 border-b border-white/10 bg-white/5 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                <span className="font-bold text-white tracking-wide">AI_ASSISTANT v1.0</span>
+                        <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
+                            <button 
+                                onClick={() => setIsOpen(false)}
+                                className="text-gray-400 hover:text-white transition-colors"
+                            >
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            
+                            <div className="relative">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center border border-white/20">
+                                    <FaRobot size={20} className="text-white" />
+                                </div>
+                                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#1a1a1a]" />
                             </div>
-                            <span className="text-xs text-neon-purple border border-neon-purple/30 px-2 py-0.5 rounded">GEMINI 2.5 FLASH</span>
+
+                            <div className="flex flex-col">
+                                <span className="font-bold text-white text-sm">AI Assistant</span>
+                                <span className="text-xs text-neon-blue">Online • Gemini 2.5 Flash</span>
+                            </div>
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-6">
                             {messages.map((msg, idx) => (
-                                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`max-w-[85%] p-3 rounded-xl text-sm leading-relaxed ${
+                                <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                                    {/* Avatar */}
+                                    <div className="flex-shrink-0 mt-1">
+                                        {msg.role === 'model' ? (
+                                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
+                                                <FaRobot size={14} className="text-neon-purple" />
+                                            </div>
+                                        ) : (
+                                            <div className="w-8 h-8 rounded-full bg-neon-blue/20 flex items-center justify-center border border-neon-blue/30">
+                                                <svg className="w-4 h-4 text-neon-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                </svg>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Bubble */}
+                                    <div className={`max-w-[75%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
                                         msg.role === 'user' 
-                                            ? 'bg-neon-blue/20 border border-neon-blue/30 text-white rounded-br-none' 
-                                            : 'bg-white/10 text-gray-200 rounded-bl-none'
+                                            ? 'bg-neon-purple/20 border border-neon-purple/30 text-white rounded-tr-none' 
+                                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-tl-none'
                                     }`}>
                                         {msg.role === 'model' ? (
                                              <ReactMarkdown 
                                                 components={{
                                                     strong: ({node, ...props}) => <span className="text-neon-pink font-bold" {...props} />,
                                                     ul: ({node, ...props}) => <ul className="list-disc pl-4 mt-2 mb-2" {...props} />,
-                                                    li: ({node, ...props}) => <li className="mb-1" {...props} />
+                                                    li: ({node, ...props}) => <li className="mb-1" {...props} />,
+                                                    a: ({node, ...props}) => <a className="text-neon-blue hover:underline" target="_blank" {...props} />
                                                 }}
                                              >
                                                 {msg.text}

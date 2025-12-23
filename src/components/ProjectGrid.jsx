@@ -6,9 +6,10 @@ import repos from "../data/repos.json";
 const ProjectCard = ({ repo, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className="glass-card p-6 flex flex-col h-full hover:scale-105 transition-transform duration-300"
     >
       <div className="flex justify-between items-start mb-4">

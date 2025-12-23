@@ -97,7 +97,7 @@ const AIChat = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-neon-purple/20 border border-neon-purple backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_15px_rgba(188,19,254,0.3)] hover:shadow-[0_0_25px_rgba(188,19,254,0.6)] transition-all"
+                className="fixed bottom-5 right-5 z-[9999] w-14 h-14 rounded-full bg-neon-purple/20 border border-neon-purple backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_15px_rgba(188,19,254,0.3)] hover:shadow-[0_0_25px_rgba(188,19,254,0.6)] transition-all"
             >
                 {isOpen ? (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

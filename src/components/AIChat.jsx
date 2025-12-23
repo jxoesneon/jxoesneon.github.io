@@ -43,6 +43,16 @@ ${JSON.stringify(experienceData)}
 - STAY IN CHARACTER: You are part of the digital interface of this site.
 `;
 
+const THINKING_STEPS = [
+    "Systems online...",
+    "Accessing decentralized nodes...",
+    "Verifying knowledge graph...",
+    "Querying IPFS...",
+    "Syncing with Gemini...",
+    "Parsing context...",
+    "Decrypting creative axioms..."
+];
+
 const AIChat = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
@@ -50,6 +60,7 @@ const AIChat = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [loadingStatus, setLoadingStatus] = useState('');
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -58,7 +69,23 @@ const AIChat = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages]);
+    }, [messages, loadingStatus]); // Scroll when status updates too
+
+    // Thinking animation effect
+    useEffect(() => {
+        let interval;
+        if (isLoading) {
+            setLoadingStatus(THINKING_STEPS[0]);
+            let index = 1;
+            interval = setInterval(() => {
+                setLoadingStatus(THINKING_STEPS[index % THINKING_STEPS.length]);
+                index++;
+            }, 800);
+        } else {
+            setLoadingStatus('');
+        }
+        return () => clearInterval(interval);
+    }, [isLoading]);
 
     const handleSend = async () => {
         if (!input.trim() || isLoading) return;
@@ -69,6 +96,9 @@ const AIChat = () => {
         setIsLoading(true);
 
         try {
+            // Artificial delay for "Thinking" animation and rate-limit throttling
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
             const genAI = new GoogleGenerativeAI(API_KEY);
             const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
             
@@ -216,6 +246,21 @@ const AIChat = () => {
                                     </div>
                                 </div>
                             ))}
+                            
+                            {/* Loading Indicator with Dynamic Text */}
+                            {isLoading && (
+                                <div className="message-row ai">
+                                    <div style={{ flexShrink: 0, marginTop: '4px' }}>
+                                        <div className="chat-avatar" style={{ width: 28, height: 28 }}>
+                                            <FaRobot size={12} style={{ color: 'var(--neon-purple)' }} />
+                                        </div>
+                                    </div>
+                                    <div className="message-bubble ai" style={{ fontStyle: 'italic', color: 'var(--neon-blue)', fontSize: '0.85rem' }}>
+                                        {loadingStatus}
+                                        <span className="typing-dots">...</span>
+                                    </div>
+                                </div>
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
 

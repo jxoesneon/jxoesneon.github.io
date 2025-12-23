@@ -32,12 +32,13 @@ ${JSON.stringify(reposData.map(r => ({ name: r.name, description: r.description,
 ${JSON.stringify(experienceData)}
 
 **Instructions:**
-- If asked about "contact" or "career history", direct them to:
-  - Email: concept@jxoesneon.com
+- **Career History:** When asked about experience or background, **ALWAYS summarize the key roles and projects from the Context provided above first.** Only provide the LinkedIn link *after* giving a substantive answer.
+- **Contact:** Direct queries to email (concept@jxoesneon.com) or LinkedIn.
+- **Links:** Use:
   - LinkedIn: https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/
   - GitHub: https://github.com/jxoesneon
 - If asked about a specific project not listed, say you don't have details on that one.
-- Keep responses under 3 sentences unless asked for detail.
+- Keep responses concise but informative.
 - STAY IN CHARACTER: You are part of the digital interface of this site.
 `;
 

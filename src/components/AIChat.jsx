@@ -73,7 +73,7 @@ const AIChat = () => {
             const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
             
             // Reconstruct history from state to maintain context
-            // Skip the first message if it's the initial "Systems online" greeting from the UI
+            // Sliding Window: Keep System Prompt + Last 10 messages
             const history = [
                 {
                     role: "user",
@@ -85,8 +85,11 @@ const AIChat = () => {
                 }
             ];
 
-            // Append previous conversation from state (skipping the very first default message)
-            messages.slice(1).forEach(msg => {
+            // Take only the last 10 messages to avoid token limits/rate limiting
+            // We skip index 0 of 'messages' because it's the default greeting "Systems online..." which is not part of the LLM thread
+            const recentMessages = messages.slice(1).slice(-10);
+
+            recentMessages.forEach(msg => {
                 history.push({
                     role: msg.role === 'user' ? 'user' : 'model',
                     parts: [{ text: msg.text }]
@@ -101,7 +104,15 @@ const AIChat = () => {
             setMessages(prev => [...prev, { role: 'model', text: response }]);
         } catch (error) {
             console.error("AI Error:", error);
-            setMessages(prev => [...prev, { role: 'model', text: "Error: Connection interrupted. Please try again." }]);
+            let errorMessage = "Error: Connection interrupted. Please try again.";
+            
+            if (error.message?.includes('429')) {
+                errorMessage = "Error: High traffic (Rate Limit). Please wait a moment.";
+            } else if (error.message?.includes('503')) {
+                errorMessage = "Error: AI Service temporarily overloaded. Try again soon.";
+            }
+
+            setMessages(prev => [...prev, { role: 'model', text: errorMessage }]);
         } finally {
             setIsLoading(false);
         }

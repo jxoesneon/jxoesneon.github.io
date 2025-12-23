@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { FaRobot } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import reposData from '../data/repos.json';
@@ -34,9 +35,9 @@ ${JSON.stringify(experienceData)}
 **Instructions:**
 - **Career History:** When asked about experience or background, **ALWAYS summarize the key roles and projects from the Context provided above first.** Only provide the LinkedIn link *after* giving a substantive answer.
 - **Contact:** Direct queries to email (concept@jxoesneon.com) or LinkedIn.
-- **Links:** Use:
-  - LinkedIn: https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/
-  - GitHub: https://github.com/jxoesneon
+- **Links:** ALWAYS use Markdown format for links: \`[Link Text](URL)\`.
+  - LinkedIn: [Jose's LinkedIn Profile](https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/)
+  - GitHub: [jxoesneon on GitHub](https://github.com/jxoesneon)
 - If asked about a specific project not listed, say you don't have details on that one.
 - Keep responses concise but informative.
 - STAY IN CHARACTER: You are part of the digital interface of this site.
@@ -178,11 +179,12 @@ const AIChat = () => {
                                     <div className={`message-bubble ${msg.role === 'user' ? 'user' : 'ai'} markdown-content`}>
                                         {msg.role === 'model' ? (
                                              <ReactMarkdown 
+                                                remarkPlugins={[remarkGfm]}
                                                 components={{
                                                     strong: ({node, ...props}) => <strong {...props} />,
                                                     ul: ({node, ...props}) => <ul {...props} />,
                                                     li: ({node, ...props}) => <li {...props} />,
-                                                    a: ({node, ...props}) => <a target="_blank" {...props} />
+                                                    a: ({node, ...props}) => <a target="_blank" rel="noopener noreferrer" {...props} />
                                                 }}
                                              >
                                                 {msg.text}

@@ -67,10 +67,6 @@ const AIChat = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages, loadingStatus]); // Scroll when status updates too
-
     // Thinking animation effect
     useEffect(() => {
         let interval;
@@ -80,7 +76,7 @@ const AIChat = () => {
             interval = setInterval(() => {
                 setLoadingStatus(THINKING_STEPS[index % THINKING_STEPS.length]);
                 index++;
-            }, 800);
+            }, 2000); // Slower, more relaxed pace
         } else {
             setLoadingStatus('');
         }
@@ -95,43 +91,54 @@ const AIChat = () => {
         setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
         setIsLoading(true);
 
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+        // Helper to attempt sending with retries and shrinking context
+        const callGeminiWithRetry = async (contextLimit = 10, attempts = 0) => {
+            try {
+                // Base History (System + Ack)
+                const history = [
+                    { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
+                    { role: "model", parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }] }
+                ];
+
+                // Add recent messages based on current limit
+                const recentMessages = messages.slice(1).slice(-contextLimit);
+                recentMessages.forEach(msg => {
+                    history.push({
+                        role: msg.role === 'user' ? 'user' : 'model',
+                        parts: [{ text: msg.text }]
+                    });
+                });
+
+                const chat = model.startChat({ history });
+                const result = await chat.sendMessage(userMessage);
+                return result.response.text();
+
+            } catch (error) {
+                // If we have retries left and it's a likely temporary error (429/503)
+                if (attempts < 2 && (error.message?.includes('429') || error.message?.includes('503'))) {
+                    console.warn(`Retry attempt ${attempts + 1}: Reducing context to ${Math.floor(contextLimit / 2)}`);
+                    setLoadingStatus(`Traffic high... Optimizing context (${attempts + 1}/2)...`);
+                    
+                    // Wait 2 seconds before retry
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Retry with half the context
+                    return callGeminiWithRetry(Math.floor(contextLimit / 2), attempts + 1);
+                }
+                throw error;
+            }
+        };
+
         try {
-            // Artificial delay for "Thinking" animation and rate-limit throttling
+            // Initial delay for "Thinking" animation (minimum 2s)
             await new Promise(resolve => setTimeout(resolve, 2000));
 
-            const genAI = new GoogleGenerativeAI(API_KEY);
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-            
-            // Reconstruct history from state to maintain context
-            // Sliding Window: Keep System Prompt + Last 10 messages
-            const history = [
-                {
-                    role: "user",
-                    parts: [{ text: SYSTEM_PROMPT }],
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }],
-                }
-            ];
-
-            // Take only the last 10 messages to avoid token limits/rate limiting
-            // We skip index 0 of 'messages' because it's the default greeting "Systems online..." which is not part of the LLM thread
-            const recentMessages = messages.slice(1).slice(-10);
-
-            recentMessages.forEach(msg => {
-                history.push({
-                    role: msg.role === 'user' ? 'user' : 'model',
-                    parts: [{ text: msg.text }]
-                });
-            });
-
-            const chat = model.startChat({ history });
-
-            const result = await chat.sendMessage(userMessage);
-            const response = result.response.text();
-
+            const response = await callGeminiWithRetry(10); // Start with last 10 messages
             setMessages(prev => [...prev, { role: 'model', text: response }]);
+
         } catch (error) {
             console.error("AI Error:", error);
             let errorMessage = "Error: Connection interrupted. Please try again.";

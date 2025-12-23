@@ -50,7 +50,28 @@ const THINKING_STEPS = [
     "Querying IPFS...",
     "Syncing with Gemini...",
     "Parsing context...",
-    "Decrypting creative axioms..."
+    "Decrypting creative axioms...",
+    "Triangulating semantic vectors...",
+    "Handshaking with MCP relays...",
+    "Fetching neural patterns...",
+    "Optimizing data density...",
+    "Re-routing through FerroTeX...",
+    "Validating P2P checksums...",
+    "Engaging creative subroutines...",
+    "Synthesizing ecosystem data...",
+    "Analyzing graph connections...",
+    "Establishing secure link...",
+    "Updating local cache..."
+];
+
+const RETRY_MESSAGES = [
+    "Traffic high. Re-routing via auxiliary nodes...",
+    "Signal congested. Compressing context stream...",
+    "Network busy. Switching to backup relay...",
+    "Requesting priority channel access...",
+    "Cooling down neural pathways...",
+    "Modulating frequency for clearer signal...",
+    "Bypassing congested data lanes..."
 ];
 
 const AIChat = () => {
@@ -66,6 +87,10 @@ const AIChat = () => {
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages, loadingStatus]); // Scroll when status updates too
 
     // Thinking animation effect
     useEffect(() => {
@@ -121,7 +146,10 @@ const AIChat = () => {
                 // Retry up to 3 times (Total wait ~9s + execution time > 10s)
                 if (attempts < 3 && (error.message?.includes('429') || error.message?.includes('503'))) {
                     console.warn(`Retry attempt ${attempts + 1}: Reducing context to ${Math.floor(contextLimit / 2)}`);
-                    setLoadingStatus(`Optimizing signal (Attempt ${attempts + 1}/3)...`);
+                    
+                    // Use a varied retry message
+                    const retryMsg = RETRY_MESSAGES[attempts % RETRY_MESSAGES.length] || `Optimizing signal (Attempt ${attempts + 1}/3)...`;
+                    setLoadingStatus(retryMsg);
                     
                     // Wait 3 seconds before retry
                     await new Promise(resolve => setTimeout(resolve, 3000));

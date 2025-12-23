@@ -35,7 +35,7 @@ const BentoGrid = () => {
         {/* Tech Stack - Tall Tile */}
         <BentoTile className="md:row-span-2" delay={0.2}>
           <h3 className="text-xl font-bold mb-6 text-neon-green">Tech Stack</h3>
-          <div className="grid grid-cols-2 gap-4 text-3xl text-gray-400">
+          <div className="flex flex-wrap justify-center gap-4 text-3xl text-gray-400">
             <SiReact className="hover:text-[#61DAFB] transition-colors" title="React" />
             <SiVite className="hover:text-[#646CFF] transition-colors" title="Vite" />
             <SiFlutter className="hover:text-[#02569B] transition-colors" title="Flutter" />

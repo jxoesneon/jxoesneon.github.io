@@ -50,7 +50,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="gradient-text pb-2 min-h-[1.2em]"
+              className="gradient-text pb-2 min-h-[1.2em] bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent block"
             >
               {showFullName ? "Jose Eduardo Rojas Jimenez" : "jxoesneon"}
             </motion.span>

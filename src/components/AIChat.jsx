@@ -61,7 +61,7 @@ const AIChat = () => {
 
         try {
             const genAI = new GoogleGenerativeAI(API_KEY);
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
             
             const chat = model.startChat({
                 history: [
@@ -125,7 +125,7 @@ const AIChat = () => {
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                                 <span className="font-bold text-white tracking-wide">AI_ASSISTANT v1.0</span>
                             </div>
-                            <span className="text-xs text-neon-purple border border-neon-purple/30 px-2 py-0.5 rounded">GEMINI FLASH</span>
+                            <span className="text-xs text-neon-purple border border-neon-purple/30 px-2 py-0.5 rounded">GEMINI 2.5 FLASH</span>
                         </div>
 
                         {/* Messages */}

@@ -3,12 +3,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Hero = () => {
   const [showFullName, setShowFullName] = useState(false);
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  const taglines = [
+    "Building the bridge between Artificial Intelligence and Desktop Reality via the Model Context Protocol.",
+    "Pioneering decentralized infrastructure with IPFS and peer-to-peer networks.",
+    "Revolutionizing creative workflows with AI-driven automation for Blender and Unreal Engine 5.",
+    "Engineering next-generation tools for research, simulation, and decentralized compute."
+  ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const nameInterval = setInterval(() => {
       setShowFullName(prev => !prev);
     }, 4000);
-    return () => clearInterval(interval);
+
+    const taglineInterval = setInterval(() => {
+      setTaglineIndex(prev => (prev + 1) % taglines.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(nameInterval);
+      clearInterval(taglineInterval);
+    };
   }, []);
 
   return (
@@ -19,7 +35,7 @@ const Hero = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="z-10"
+        className="z-10 w-full max-w-4xl"
       >
         <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-neon-blue text-sm mb-6 backdrop-blur-md">
           Decentralized Systems & AI
@@ -34,16 +50,27 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="gradient-text pb-2"
+              className="gradient-text pb-2 min-h-[1.2em]"
             >
               {showFullName ? "Jose Eduardo Rojas Jimenez" : "jxoesneon"}
             </motion.span>
           </AnimatePresence>
         </h1>
         
-        <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Building the bridge between <span className="text-white">Artificial Intelligence</span> and <span className="text-white">Desktop Reality</span> via the Model Context Protocol.
-        </p>
+        <div className="h-24 md:h-20 mb-10 flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.p 
+              key={taglineIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
+            >
+              {taglines[taglineIndex]}
+            </motion.p>
+          </AnimatePresence>
+        </div>
 
         <div className="flex gap-4 justify-center">
           <a href="https://github.com/jxoesneon" className="btn-primary">

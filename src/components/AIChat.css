@@ -246,3 +246,42 @@
   cursor: not-allowed;
   background: #333;
 }
+
+/* Quick Action Chips */
+.chat-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.chat-chips::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.chat-chip {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.chat-chip:hover {
+  background: rgba(188, 19, 254, 0.15);
+  border-color: rgba(188, 19, 254, 0.4);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.chat-chip:active {
+  transform: scale(0.95);
+}

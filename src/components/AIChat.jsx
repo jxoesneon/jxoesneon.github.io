@@ -108,12 +108,12 @@ const AIChat = () => {
         return () => clearInterval(interval);
     }, [isLoading]);
 
-    const handleSend = async () => {
-        if (!input.trim() || isLoading) return;
+    const handleSend = async (manualInput = null) => {
+        const textToSend = manualInput || input;
+        if (!textToSend.trim() || isLoading) return;
 
-        const userMessage = input;
         setInput('');
-        setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
+        setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
         setIsLoading(true);
 
         const genAI = new GoogleGenerativeAI(API_KEY);
@@ -138,7 +138,7 @@ const AIChat = () => {
                 });
 
                 const chat = model.startChat({ history });
-                const result = await chat.sendMessage(userMessage);
+                const result = await chat.sendMessage(textToSend);
                 return result.response.text();
 
             } catch (error) {
@@ -166,7 +166,36 @@ const AIChat = () => {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             const response = await callGeminiWithRetry(10); // Start with last 10 messages
-            setMessages(prev => [...prev, { role: 'model', text: response }]);
+            
+            // STREAMING EFFECT
+            // 1. Add placeholder empty message
+            setMessages(prev => [...prev, { role: 'model', text: '' }]);
+            
+            // 2. Stream text character by character
+            const streamText = async (text) => {
+                const chunkSize = 3; // Characters per tick (tuned for speed/performance balance)
+                for (let i = 0; i < text.length; i += chunkSize) {
+                    const chunk = text.slice(i, i + chunkSize);
+                    
+                    // Use functional update to append to the VERY LAST message
+                    setMessages(prev => {
+                        const newMsgs = [...prev];
+                        const lastMsgIndex = newMsgs.length - 1;
+                        if (lastMsgIndex >= 0) {
+                            newMsgs[lastMsgIndex] = {
+                                ...newMsgs[lastMsgIndex],
+                                text: newMsgs[lastMsgIndex].text + chunk
+                            };
+                        }
+                        return newMsgs;
+                    });
+                    
+                    // Terminal typing speed
+                    await new Promise(resolve => setTimeout(resolve, 15));
+                }
+            };
+
+            await streamText(response);
 
         } catch (error) {
             console.error("AI Error:", error);
@@ -301,6 +330,21 @@ const AIChat = () => {
 
                         {/* Input Area */}
                         <div className="chat-input-area">
+                            {/* Quick Chips */}
+                            {!isLoading && (
+                                <div className="chat-chips">
+                                    {["Tell me about MCP", "Who is Jose?", "What is FerroTeX?", "Contact Info"].map((chip) => (
+                                        <button 
+                                            key={chip} 
+                                            className="chat-chip"
+                                            onClick={() => handleSend(chip)}
+                                        >
+                                            {chip}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
                             <form 
                                 onSubmit={(e) => { e.preventDefault(); handleSend(); }}
                                 className="chat-input-wrapper"

@@ -7,6 +7,7 @@ import { FaRobot } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import reposData from '../data/repos.json';
 import experienceData from '../data/experience.json';
+import './AIChat.css';
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
@@ -102,7 +103,7 @@ const AIChat = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ delay: 1, duration: 0.3 }}
-                        className="fixed bottom-24 right-5 z-[9998] bg-white text-black px-4 py-2 rounded-xl rounded-br-none shadow-xl text-sm font-medium pointer-events-none"
+                        className="chat-tooltip"
                     >
                         Ask AI Jose anything! ✨
                     </motion.div>
@@ -117,45 +118,52 @@ const AIChat = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed bottom-24 right-5 z-[9999] w-[350px] md:w-[380px] h-[500px] bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                        className="chat-window"
                     >
                         {/* Header */}
-                        <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
-                            <button 
-                                onClick={() => setIsOpen(false)}
-                                className="text-gray-400 hover:text-white transition-colors"
-                            >
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            
-                            <div className="relative">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center border border-white/20">
-                                    <FaRobot size={20} className="text-white" />
+                        <div className="chat-header">
+                            <div className="chat-header-user">
+                                <button 
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-gray-400 hover:text-white transition-colors"
+                                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                                >
+                                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <div style={{ position: 'relative' }}>
+                                    <div className="chat-avatar">
+                                        <FaRobot size={18} className="text-white" />
+                                    </div>
+                                    <div style={{ position: 'absolute', bottom: 0, right: 0 }} className="chat-status-dot" />
                                 </div>
-                                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#1a1a1a]" />
-                            </div>
 
-                            <div className="flex flex-col">
-                                <span className="font-bold text-white text-sm">AI Assistant</span>
-                                <span className="text-xs text-neon-blue">Online • Gemini 2.5 Flash</span>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <span style={{ fontWeight: 'bold', fontSize: '14px' }}>AI Assistant</span>
+                                    <span style={{ fontSize: '12px', color: 'var(--neon-blue)' }}>Online • Gemini 2.5 Flash</span>
+                                </div>
                             </div>
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                        <div className="chat-messages">
                             {messages.map((msg, idx) => (
-                                <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                                <div key={idx} className={`message-row ${msg.role === 'user' ? 'user' : 'ai'}`}>
                                     {/* Avatar */}
-                                    <div className="flex-shrink-0 mt-1">
+                                    <div style={{ flexShrink: 0, marginTop: '4px' }}>
                                         {msg.role === 'model' ? (
-                                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
-                                                <FaRobot size={14} className="text-neon-purple" />
+                                            <div className="chat-avatar" style={{ width: 28, height: 28 }}>
+                                                <FaRobot size={12} style={{ color: 'var(--neon-purple)' }} />
                                             </div>
                                         ) : (
-                                            <div className="w-8 h-8 rounded-full bg-neon-blue/20 flex items-center justify-center border border-neon-blue/30">
-                                                <svg className="w-4 h-4 text-neon-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <div style={{ 
+                                                width: 28, height: 28, borderRadius: '50%', 
+                                                background: 'rgba(0, 243, 255, 0.1)', border: '1px solid rgba(0, 243, 255, 0.2)',
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                            }}>
+                                                <svg width="14" height="14" style={{ color: 'var(--neon-blue)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                 </svg>
                                             </div>
@@ -163,18 +171,14 @@ const AIChat = () => {
                                     </div>
 
                                     {/* Bubble */}
-                                    <div className={`max-w-[75%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
-                                        msg.role === 'user' 
-                                            ? 'bg-neon-purple/20 border border-neon-purple/30 text-white rounded-tr-none' 
-                                            : 'bg-white/5 border border-white/10 text-gray-200 rounded-tl-none'
-                                    }`}>
+                                    <div className={`message-bubble ${msg.role === 'user' ? 'user' : 'ai'} markdown-content`}>
                                         {msg.role === 'model' ? (
                                              <ReactMarkdown 
                                                 components={{
-                                                    strong: ({node, ...props}) => <span className="text-neon-pink font-bold" {...props} />,
-                                                    ul: ({node, ...props}) => <ul className="list-disc pl-4 mt-2 mb-2" {...props} />,
-                                                    li: ({node, ...props}) => <li className="mb-1" {...props} />,
-                                                    a: ({node, ...props}) => <a className="text-neon-blue hover:underline" target="_blank" {...props} />
+                                                    strong: ({node, ...props}) => <strong {...props} />,
+                                                    ul: ({node, ...props}) => <ul {...props} />,
+                                                    li: ({node, ...props}) => <li {...props} />,
+                                                    a: ({node, ...props}) => <a target="_blank" {...props} />
                                                 }}
                                              >
                                                 {msg.text}
@@ -189,28 +193,28 @@ const AIChat = () => {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-4 border-t border-white/10 bg-black/40">
+                        <div className="chat-input-area">
                             <form 
                                 onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-                                className="flex gap-2"
+                                className="chat-input-wrapper"
                             >
                                 <input
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     placeholder="Ask about projects..."
-                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-neon-purple transition-colors placeholder-gray-500 text-sm"
+                                    className="chat-input"
                                     disabled={isLoading}
                                 />
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="bg-neon-purple/20 text-neon-purple border border-neon-purple/50 px-4 py-2 rounded-lg hover:bg-neon-purple/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="chat-send-btn"
                                 >
                                     {isLoading ? (
-                                        <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                        <div style={{ width: 16, height: 16, border: '2px solid white', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                                     ) : (
-                                        <svg className="w-5 h-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg width="20" height="20" transform="rotate(90)" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                         </svg>
                                     )}
@@ -221,17 +225,17 @@ const AIChat = () => {
                 )}
             </AnimatePresence>
 
-            {/* Toggle Button - Removed initial scale animation for instant visibility */}
+            {/* Toggle Button */}
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-5 right-5 z-[10000] w-14 h-14 rounded-full bg-gradient-to-r from-neon-purple to-neon-blue border border-white/20 flex items-center justify-center text-white shadow-[0_0_20px_rgba(188,19,254,0.5)] hover:shadow-[0_0_30px_rgba(188,19,254,0.8)] transition-all"
+                className="chat-fab"
             >
                 {isOpen ? (
                     <IoClose size={24} />
                 ) : (
-                    <FaRobot size={24} className="animate-pulse" />
+                    <FaRobot size={24} /> // removed animate-pulse to avoid conflict/overhead
                 )}
             </motion.button>
         </>,

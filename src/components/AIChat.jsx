@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
+import { FaRobot } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 import reposData from '../data/repos.json';
 import experienceData from '../data/experience.json';
 
@@ -90,6 +92,21 @@ const AIChat = () => {
 
     return (
         <>
+            {/* Proactive Tooltip */}
+            <AnimatePresence>
+                {!isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ delay: 2, duration: 0.5 }}
+                        className="fixed bottom-24 right-5 z-[9998] bg-white text-black px-4 py-2 rounded-xl rounded-br-none shadow-xl text-sm font-medium pointer-events-none"
+                    >
+                        Ask AI Jose anything! ✨
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Toggle Button */}
             <motion.button
                 initial={{ scale: 0 }}
@@ -97,16 +114,12 @@ const AIChat = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-5 right-5 z-[9999] w-14 h-14 rounded-full bg-neon-purple/20 border border-neon-purple backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_15px_rgba(188,19,254,0.3)] hover:shadow-[0_0_25px_rgba(188,19,254,0.6)] transition-all"
+                className="fixed bottom-5 right-5 z-[9999] w-16 h-16 rounded-full bg-gradient-to-r from-neon-purple to-neon-blue border border-white/20 flex items-center justify-center text-white shadow-[0_0_20px_rgba(188,19,254,0.5)] hover:shadow-[0_0_30px_rgba(188,19,254,0.8)] transition-all"
             >
                 {isOpen ? (
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <IoClose size={28} />
                 ) : (
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                    </svg>
+                    <FaRobot size={28} className="animate-pulse" />
                 )}
             </motion.button>
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
@@ -90,7 +91,8 @@ const AIChat = () => {
         }
     };
 
-    return (
+    // Use Portal to ensure fixed positioning works regardless of parent transforms
+    return ReactDOM.createPortal(
         <>
             {/* Proactive Tooltip */}
             <AnimatePresence>
@@ -99,29 +101,13 @@ const AIChat = () => {
                         initial={{ opacity: 0, y: 10, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ delay: 2, duration: 0.5 }}
+                        transition={{ delay: 1, duration: 0.3 }}
                         className="fixed bottom-24 right-5 z-[9998] bg-white text-black px-4 py-2 rounded-xl rounded-br-none shadow-xl text-sm font-medium pointer-events-none"
                     >
                         Ask AI Jose anything! ✨
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* Toggle Button */}
-            <motion.button
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-5 right-5 z-[9999] w-16 h-16 rounded-full bg-gradient-to-r from-neon-purple to-neon-blue border border-white/20 flex items-center justify-center text-white shadow-[0_0_20px_rgba(188,19,254,0.5)] hover:shadow-[0_0_30px_rgba(188,19,254,0.8)] transition-all"
-            >
-                {isOpen ? (
-                    <IoClose size={28} />
-                ) : (
-                    <FaRobot size={28} className="animate-pulse" />
-                )}
-            </motion.button>
 
             {/* Chat Window */}
             <AnimatePresence>
@@ -130,7 +116,8 @@ const AIChat = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 z-50 w-[350px] md:w-[400px] h-[500px] bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                        transition={{ duration: 0.2 }}
+                        className="fixed bottom-24 right-5 z-[9999] w-[350px] md:w-[380px] h-[500px] bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                     >
                         {/* Header */}
                         <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
@@ -157,7 +144,7 @@ const AIChat = () => {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                             {messages.map((msg, idx) => (
                                 <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                                     {/* Avatar */}
@@ -211,7 +198,7 @@ const AIChat = () => {
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder="Ask about projects, stack..."
+                                    placeholder="Ask about projects..."
                                     className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-neon-purple transition-colors placeholder-gray-500 text-sm"
                                     disabled={isLoading}
                                 />
@@ -233,7 +220,22 @@ const AIChat = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+
+            {/* Toggle Button - Removed initial scale animation for instant visibility */}
+            <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsOpen(!isOpen)}
+                className="fixed bottom-5 right-5 z-[10000] w-14 h-14 rounded-full bg-gradient-to-r from-neon-purple to-neon-blue border border-white/20 flex items-center justify-center text-white shadow-[0_0_20px_rgba(188,19,254,0.5)] hover:shadow-[0_0_30px_rgba(188,19,254,0.8)] transition-all"
+            >
+                {isOpen ? (
+                    <IoClose size={24} />
+                ) : (
+                    <FaRobot size={24} className="animate-pulse" />
+                )}
+            </motion.button>
+        </>,
+        document.body
     );
 };
 

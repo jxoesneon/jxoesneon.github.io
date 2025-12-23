@@ -1,0 +1,26 @@
+[
+  {
+    "year": "Dec 2025",
+    "title": "The Omni-Release Strategy",
+    "company": "Open Source Ecosystem",
+    "description": "Simultaneous release of major ecosystem pillars: FerroTeX (v0.18.0), IPFS for Dart (v1.5.1), and UE5-MCP (v0.6.0). Establishing the foundation for decentralized desktop automation."
+  },
+  {
+    "year": "Nov 2025",
+    "title": "Creative Automation Breakthrough",
+    "company": "MCP Initiative",
+    "description": "Pioneered the 'Creative Context Protocol' by launching MCP servers for Blender and Godot, enabling natural language control over 3D pipelines and game engine logic."
+  },
+  {
+    "year": "Sep 2025",
+    "title": "SeedSphere Launch",
+    "company": "P2P Media",
+    "description": "Released v1.0.1 of SeedSphere, a robust tracking health validation addon for Stremio, deployed via Fly.io to enhance decentralized media reliability."
+  },
+  {
+    "year": "2024",
+    "title": "Decentralized Foundations",
+    "company": "Research Phase",
+    "description": "Deep R&D into distributed systems, resulting in the core architecture for 'p2plib-dart' and 'ipfs_client_flutter', processing the building blocks for the future unified ecosystem."
+  }
+]

@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from './components/Hero';
 import ProjectGrid from './components/ProjectGrid';
 import BentoGrid from './components/BentoGrid';
+import ExperienceTimeline from './components/ExperienceTimeline';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <main>
         <Hero />
         <ProjectGrid />
+        <ExperienceTimeline />
         <BentoGrid />
       </main>
       

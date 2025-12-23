@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './components/Hero';
 import ProjectGrid from './components/ProjectGrid';
+import BentoGrid from './components/BentoGrid';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <main>
         <Hero />
         <ProjectGrid />
+        <BentoGrid />
       </main>
       
       <footer className="py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">

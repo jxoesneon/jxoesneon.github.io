@@ -50,7 +50,14 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="gradient-text pb-2 min-h-[1.2em] bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent block"
+              className="pb-2 min-h-[1.2em] block font-bold"
+              style={{
+                backgroundImage: 'linear-gradient(to right, #00f3ff, #bc13fe)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                color: 'transparent'
+              }}
             >
               {showFullName ? "Jose Eduardo Rojas Jimenez" : "jxoesneon"}
             </motion.span>

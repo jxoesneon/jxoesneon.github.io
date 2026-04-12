@@ -12,9 +12,9 @@ function App() {
   const lastUpdated = new Date(Math.max(...repos.map(r => new Date(r.updatedAt)))).toLocaleDateString();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
-      <main className="relative min-h-screen">
-        <NodeWeb />
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans relative overflow-hidden flex flex-col">
+      <NodeWeb />
+      <main className="relative z-10 flex-grow">
         <Hero />
         <ProjectGrid onProjectHover={setFocusedProject} />
         <ExperienceTimeline />
@@ -22,7 +22,7 @@ function App() {
         <AIChat focusedProject={focusedProject} />
       </main>
       
-      <footer className="py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">
+      <footer className="relative z-10 py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">
         <p>© {new Date().getFullYear()} Jose Eduardo Rojas Jimenez. Built with React & Vite.</p>
         <p className="mt-2 text-xs">Last Portfolio Sync: {lastUpdated}</p>
         <div className="flex justify-center gap-4 mt-4">

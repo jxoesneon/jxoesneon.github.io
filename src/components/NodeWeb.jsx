@@ -143,7 +143,7 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
     };
   }, [initHeader, animate]);
 
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full block -z-50" />;
+  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full block z-0 pointer-events-none" />;
 };
 
 export default ConnectingDotsBackground;

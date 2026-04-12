@@ -5,6 +5,7 @@ import ProjectGrid from './components/ProjectGrid';
 import BentoGrid from './components/BentoGrid';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import AIChat from './components/AIChat';
+import NodeWeb from './components/NodeWeb';
 
 function App() {
   const [focusedProject, setFocusedProject] = React.useState(null);
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-dark)] text-white">
+      <NodeWeb />
       <main>
         <Hero />
         <ProjectGrid onProjectHover={setFocusedProject} />

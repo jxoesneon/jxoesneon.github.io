@@ -1,101 +1,149 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
-const NodeWeb = () => {
+// --- INTERACTIVE BACKGROUND COMPONENT ---
+class Circle {
+  constructor(pos, rad) { this.pos = pos; this.radius = rad; this.active = 0; }
+  draw(ctx, theme) {
+    if (!this.active) return;
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false);
+    const colors = {
+      'light': `rgba(55, 65, 81, ${this.active})`,
+      'dark': `rgba(0, 243, 255, ${this.active})`,
+      'toast': `rgba(234, 88, 12, ${this.active * 0.8})`,
+      'burnt-toast': `rgba(251, 146, 60, ${this.active * 0.8})`
+    };
+    ctx.fillStyle = colors[theme] || colors['dark'];
+    ctx.fill();
+  }
+}
+
+const ConnectingDotsBackground = ({ theme = 'dark' }) => {
   const canvasRef = useRef(null);
-  const mouse = useRef({ x: -1000, y: -1000 });
+  const animationFrameId = useRef();
+  const pointsRef = useRef([]);
+  const targetRef = useRef({ x: 0, y: 0 });
+  const animateHeaderRef = useRef(true);
 
-  useEffect(() => {
+  const getDistance = (p1, p2) => Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+
+  const drawLines = useCallback((p, ctx) => {
+    if (!p.active) return;
+    const lineColors = {
+      'light': `rgba(107, 114, 128, ${p.active})`,
+      'dark': `rgba(188, 19, 254, ${p.active})`,
+      'toast': `rgba(234, 88, 12, ${p.active})`,
+      'burnt-toast': `rgba(251, 146, 60, ${p.active})`
+    };
+    for (const i in p.closest) {
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.closest[i].x, p.closest[i].y);
+      ctx.strokeStyle = lineColors[theme] || lineColors['dark'];
+      ctx.stroke();
+    }
+  }, [theme]);
+
+  const shiftPoint = useCallback((p) => {
+    const duration = 1 + Math.random();
+    const targetX = p.originX - 50 + Math.random() * 100;
+    const targetY = p.originY - 50 + Math.random() * 100;
+    const startX = p.x;
+    const startY = p.y;
+    let startTime = null;
+
+    const easeInOutCirc = (t) => t < 0.5 ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2 : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2;
+
+    const animatePoint = (time) => {
+      if (!startTime) startTime = time;
+      const progress = (time - startTime) / (duration * 1000);
+      if (progress < 1) {
+        p.x = startX + (targetX - startX) * easeInOutCirc(progress);
+        p.y = startY + (targetY - startY) * easeInOutCirc(progress);
+        requestAnimationFrame(animatePoint);
+      } else {
+        p.x = targetX;
+        p.y = targetY;
+        shiftPoint(p);
+      }
+    };
+    requestAnimationFrame(animatePoint);
+  }, []);
+
+  const animate = useCallback(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationFrameId;
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const i in pointsRef.current) {
+      const p = pointsRef.current[i];
+      const dist = getDistance(targetRef.current, p);
+      if (dist < 4000) { p.active = 0.3; p.circle.active = 0.6; }
+      else if (dist < 20000) { p.active = 0.1; p.circle.active = 0.3; }
+      else if (dist < 40000) { p.active = 0.02; p.circle.active = 0.1; }
+      else { p.active = 0; p.circle.active = 0; }
+      drawLines(p, ctx);
+      p.circle.draw(ctx, theme);
+    }
+    animationFrameId.current = requestAnimationFrame(animate);
+  }, [drawLines, theme]);
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+  const initHeader = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    targetRef.current = { x: width / 2, y: height / 2 };
+    canvas.width = width;
+    canvas.height = height;
 
-    const handleMouseMove = (e) => {
-      mouse.current = { x: e.clientX, y: e.clientY };
-    };
-
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', handleMouseMove);
-    resize();
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-      }
-      draw() {
-        const dx = mouse.current.x - this.x;
-        const dy = mouse.current.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const size = dist < 100 ? 4 : 1.5;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = dist < 100 ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 243, 255, 0.3)';
-        ctx.fill();
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        
-        const dx = mouse.current.x - this.x;
-        const dy = mouse.current.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-            this.x -= dx * 0.02;
-            this.y -= dy * 0.02;
-        }
+    const newPoints = [];
+    for (let x = 0; x < width; x = x + width / 20) {
+      for (let y = 0; y < height; y = y + height / 20) {
+        const px = x + Math.random() * width / 20;
+        const py = y + Math.random() * height / 20;
+        const p = { x: px, originX: px, y: py, originY: py, closest: [] };
+        newPoints.push(p);
       }
     }
-
-    for (let i = 0; i < 60; i++) particles.push(new Particle());
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(188, 19, 254, ${0.1 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+    for (let i = 0; i < newPoints.length; i++) {
+      const closest = [];
+      const p1 = newPoints[i];
+      for (let j = 0; j < newPoints.length; j++) {
+        const p2 = newPoints[j];
+        if (p1 !== p2) {
+          let placed = false;
+          for (let k = 0; k < 5; k++) {
+            if (!placed) { if (closest[k] === undefined || getDistance(p1, p2) < getDistance(p1, closest[k])) { closest[k] = p2; placed = true; } }
           }
         }
       }
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    animate();
+      p1.closest = closest;
+      p1.circle = new Circle(p1, 2 + Math.random() * 2);
+    }
+    pointsRef.current = newPoints;
+    pointsRef.current.forEach(shiftPoint);
+  }, [shiftPoint]);
+
+  useEffect(() => {
+    initHeader();
+    animationFrameId.current = requestAnimationFrame(animate);
+
+    const handleMouseMove = (e) => { targetRef.current = { x: e.clientX, y: e.clientY }; };
+    const handleResize = () => initHeader();
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId.current);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [initHeader, animate]);
 
-  return (
-    <div className="fixed inset-0 -z-50 bg-[#0a0a0a] pointer-events-none">
-        <canvas ref={canvasRef} className="block w-full h-full" />
-    </div>
-  );
+  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full block -z-50" />;
 };
 
-export default NodeWeb;
+export default ConnectingDotsBackground;

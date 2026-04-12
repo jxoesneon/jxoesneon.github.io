@@ -12,24 +12,29 @@ function App() {
   const lastUpdated = new Date(Math.max(...repos.map(r => new Date(r.updatedAt)))).toLocaleDateString();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="relative min-h-screen bg-[#0a0a0a] overflow-x-hidden">
+      {/* Background Layer */}
       <NodeWeb />
-      <main className="relative z-10">
-        <Hero />
-        <ProjectGrid onProjectHover={setFocusedProject} />
-        <ExperienceTimeline />
-        <BentoGrid />
-        <AIChat focusedProject={focusedProject} />
-      </main>
-      
-      <footer className="py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">
-        <p>© {new Date().getFullYear()} Jose Eduardo Rojas Jimenez. Built with React & Vite.</p>
-        <p className="mt-2 text-xs">Last Portfolio Sync: {lastUpdated}</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <a href="https://github.com/jxoesneon" className="hover:text-neon-blue transition-colors">GitHub</a>
-          <a href="https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/" className="hover:text-neon-blue transition-colors">LinkedIn</a>
-        </div>
-      </footer>
+
+      {/* Foreground Layer */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <main className="flex-grow">
+          <Hero />
+          <ProjectGrid onProjectHover={setFocusedProject} />
+          <ExperienceTimeline />
+          <BentoGrid />
+          <AIChat focusedProject={focusedProject} />
+        </main>
+        
+        <footer className="py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">
+          <p>© {new Date().getFullYear()} Jose Eduardo Rojas Jimenez. Built with React & Vite.</p>
+          <p className="mt-2 text-xs">Last Portfolio Sync: {lastUpdated}</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <a href="https://github.com/jxoesneon" className="hover:text-neon-blue transition-colors">GitHub</a>
+            <a href="https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/" className="hover:text-neon-blue transition-colors">LinkedIn</a>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }

@@ -59,22 +59,18 @@ const ProjectCard = ({ repo, index }) => {
 };
 
 const ProjectGrid = () => {
-  // Filter repos as defined in the plan
-  const featured = ["FerroTeX", "UE5-MCP", "IPFS", "dart_lz4"];
-  const mcp = [
-    "ultramac-mcp",
-    "blender-mcp",
-    "godot-mcp",
-    "mcp-server-gemini-image-generator",
-  ];
-
-  const featuredRepos = repos.filter((r) => featured.includes(r.name));
-  const mcpRepos = repos.filter((r) => mcp.includes(r.name));
+  // Categorize repositories dynamically
+  const mcpRepos = repos.filter((r) => 
+    r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp'))
+  );
+  const featuredRepos = repos.filter((r) => 
+    !r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp'))
+  );
 
   return (
     <div className="container mx-auto px-4 py-20">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center gradient-text">
-        Latest Releases
+        Featured Projects
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-24">
         {featuredRepos.map((repo, idx) => (
@@ -87,7 +83,7 @@ const ProjectGrid = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
         {mcpRepos.map((repo, idx) => (
-          <ProjectCard key={repo.name} repo={repo} index={idx + 4} />
+          <ProjectCard key={repo.name} repo={repo} index={idx + featuredRepos.length} />
         ))}
       </div>
     </div>

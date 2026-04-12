@@ -363,3 +363,51 @@ body {
 .duration-300 {
   transition-duration: 300ms;
 }
+
+/* Positioning */
+.fixed {
+  position: fixed;
+}
+.top-0 {
+  top: 0;
+}
+.left-0 {
+  left: 0;
+}
+.z-0 {
+  z-index: 0;
+}
+.block {
+  display: block;
+}
+
+/* Layout extras used in App.jsx */
+.min-h-screen {
+  min-height: 100vh;
+}
+.bg-\[\#0a0a0a\] {
+  background-color: #0a0a0a;
+}
+.font-sans {
+  font-family: "Inter", sans-serif;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}

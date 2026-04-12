@@ -74,7 +74,7 @@ const RETRY_MESSAGES = [
     "Bypassing congested data lanes..."
 ];
 
-const AIChat = () => {
+const AIChat = ({ focusedProject }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { role: 'model', text: "Systems online. Ask me anything about Jose's work or the MCP ecosystem." }
@@ -84,16 +84,18 @@ const AIChat = () => {
     const [loadingStatus, setLoadingStatus] = useState('');
     const messagesEndRef = useRef(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages, loadingStatus]); // Scroll when status updates too
+    // Update SYSTEM_PROMPT dynamically if focusedProject changes
+    const systemPrompt = React.useMemo(() => {
+        let prompt = SYSTEM_PROMPT;
+        if (focusedProject) {
+            prompt += `\n\n**Current Context:** The user is currently looking at the project "${focusedProject.name}".\nDescription: ${focusedProject.description || "No description."}\nIf they ask a general question, you may subtly mention this project.`;
+        }
+        return prompt;
+    }, [focusedProject]);
 
     // Thinking animation effect
     useEffect(() => {
+        // ... (existing effect logic)
         let interval;
         if (isLoading) {
             setLoadingStatus(THINKING_STEPS[0]);
@@ -101,7 +103,7 @@ const AIChat = () => {
             interval = setInterval(() => {
                 setLoadingStatus(THINKING_STEPS[index % THINKING_STEPS.length]);
                 index++;
-            }, 2000); // Slower, more relaxed pace
+            }, 2000);
         } else {
             setLoadingStatus('');
         }
@@ -124,9 +126,11 @@ const AIChat = () => {
             try {
                 // Base History (System + Ack)
                 const history = [
-                    { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
+                    { role: "user", parts: [{ text: systemPrompt }] },
                     { role: "model", parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }] }
                 ];
+                // ... (rest of the handleSend logic)
+
 
                 // Add recent messages based on current limit
                 const recentMessages = messages.slice(1).slice(-contextLimit);

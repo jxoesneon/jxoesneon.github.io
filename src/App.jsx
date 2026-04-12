@@ -7,16 +7,17 @@ import ExperienceTimeline from './components/ExperienceTimeline';
 import AIChat from './components/AIChat';
 
 function App() {
+  const [focusedProject, setFocusedProject] = React.useState(null);
   const lastUpdated = new Date(Math.max(...repos.map(r => new Date(r.updatedAt)))).toLocaleDateString();
 
   return (
     <div className="min-h-screen bg-[var(--bg-dark)] text-white">
       <main>
         <Hero />
-        <ProjectGrid />
+        <ProjectGrid onProjectHover={setFocusedProject} />
         <ExperienceTimeline />
         <BentoGrid />
-        <AIChat />
+        <AIChat focusedProject={focusedProject} />
       </main>
       
       <footer className="py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">

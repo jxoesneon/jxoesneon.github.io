@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
 import repos from "../data/repos.json";
 
-const ProjectCard = ({ repo, index }) => {
+const ProjectCard = ({ repo, index, onHover }) => {
   return (
     <motion.div
+      onMouseEnter={() => onHover(repo)}
+      onMouseLeave={() => onHover(null)}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -58,7 +60,7 @@ const ProjectCard = ({ repo, index }) => {
   );
 };
 
-const ProjectGrid = () => {
+const ProjectGrid = ({ onProjectHover }) => {
   // Categorize repositories dynamically
   const mcpRepos = repos.filter((r) => 
     r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp'))
@@ -74,7 +76,7 @@ const ProjectGrid = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-24">
         {featuredRepos.map((repo, idx) => (
-          <ProjectCard key={repo.name} repo={repo} index={idx} />
+          <ProjectCard key={repo.name} repo={repo} index={idx} onHover={onProjectHover} />
         ))}
       </div>
 
@@ -83,7 +85,7 @@ const ProjectGrid = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
         {mcpRepos.map((repo, idx) => (
-          <ProjectCard key={repo.name} repo={repo} index={idx + featuredRepos.length} />
+          <ProjectCard key={repo.name} repo={repo} index={idx + featuredRepos.length} onHover={onProjectHover} />
         ))}
       </div>
     </div>

@@ -1,0 +1,16 @@
+{
+  "name": "jxoesneon.github.io",
+  "short_name": "jxoesneon",
+  "description": "Decentralized Systems & AI Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00f3ff",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

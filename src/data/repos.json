@@ -1,9 +1,9 @@
 [
   {
-    "name": "jxoesneon",
-    "description": "Personal profile for Jose Eduardo Rojas Jimenez",
+    "name": "jxoesneon.github.io",
+    "description": null,
     "stargazerCount": 0,
-    "updatedAt": "2026-04-12T07:14:44Z",
+    "updatedAt": "2026-04-12T17:41:23Z",
     "repositoryTopics": [
       {
         "name": "github-sponsors"
@@ -15,7 +15,7 @@
     "name": "mempalace-rs",
     "description": "A high-performance, local, offline-first AI memory system built in Rust",
     "stargazerCount": 17,
-    "updatedAt": "2026-04-12T01:32:14Z",
+    "updatedAt": "2026-04-12T16:01:24Z",
     "repositoryTopics": [
       {
         "name": "ai"
@@ -45,6 +45,18 @@
       "url": "https://github.com/jxoesneon/mempalace-rs/releases/tag/v0.4.1",
       "publishedAt": "2026-04-10T20:07:20Z"
     }
+  },
+  {
+    "name": "jxoesneon",
+    "description": "Personal profile for Jose Eduardo Rojas Jimenez",
+    "stargazerCount": 0,
+    "updatedAt": "2026-04-12T07:14:44Z",
+    "repositoryTopics": [
+      {
+        "name": "github-sponsors"
+      }
+    ],
+    "latestRelease": null
   },
   {
     "name": "Alloy",
@@ -226,18 +238,6 @@
       },
       {
         "name": "typescript"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "hermesbot",
-    "description": "A timely notifier.",
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:36:28Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
       }
     ],
     "latestRelease": null

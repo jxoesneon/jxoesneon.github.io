@@ -12,9 +12,9 @@ function App() {
   const lastUpdated = new Date(Math.max(...repos.map(r => new Date(r.updatedAt)))).toLocaleDateString();
 
   return (
-    <div className="min-h-screen bg-[var(--bg-dark)] text-white">
+    <div className="min-h-screen bg-[#0a0a0a]">
       <NodeWeb />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <ProjectGrid onProjectHover={setFocusedProject} />
         <ExperienceTimeline />

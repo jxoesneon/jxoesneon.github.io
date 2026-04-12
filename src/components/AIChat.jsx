@@ -296,10 +296,10 @@ const AIChat = () => {
                                              <ReactMarkdown 
                                                 remarkPlugins={[remarkGfm]}
                                                 components={{
-                                                    strong: ({node, ...props}) => <strong {...props} />,
-                                                    ul: ({node, ...props}) => <ul {...props} />,
-                                                    li: ({node, ...props}) => <li {...props} />,
-                                                    a: ({node, ...props}) => <a target="_blank" rel="noopener noreferrer" {...props} />
+                                                    strong: ({node: _node, ...props}) => <strong {...props} />,
+                                                    ul: ({node: _node, ...props}) => <ul {...props} />,
+                                                    li: ({node: _node, ...props}) => <li {...props} />,
+                                                    a: ({node: _node, ...props}) => <a target="_blank" rel="noopener noreferrer" {...props} />
                                                 }}
                                              >
                                                 {msg.text}

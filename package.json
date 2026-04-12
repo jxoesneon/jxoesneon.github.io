@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/fetch-repos.js",
+    "prebuild": "node scripts/fetch-repos.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

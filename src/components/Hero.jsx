@@ -25,7 +25,7 @@ const Hero = () => {
       clearInterval(nameInterval);
       clearInterval(taglineInterval);
     };
-  }, []);
+  }, [taglines.length]);
 
   return (
     <section className="min-h-[80vh] flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">

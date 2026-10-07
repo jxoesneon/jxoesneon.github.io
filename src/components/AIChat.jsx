@@ -242,7 +242,8 @@ const AIChat = ({ focusedProject }) => {
         };
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const delay = import.meta.env.MODE === 'test' ? 10 : 1500;
+            await new Promise(resolve => setTimeout(resolve, delay));
 
             const response = await callAI(10);
             
@@ -251,6 +252,7 @@ const AIChat = ({ focusedProject }) => {
             
             const streamText = async (text) => {
                 const chunkSize = 3;
+                const streamDelay = import.meta.env.MODE === 'test' ? 1 : 15;
                 for (let i = 0; i < text.length; i += chunkSize) {
                     const chunk = text.slice(i, i + chunkSize);
                     setMessages(prev => {
@@ -264,7 +266,7 @@ const AIChat = ({ focusedProject }) => {
                         }
                         return newMsgs;
                     });
-                    await new Promise(resolve => setTimeout(resolve, 15));
+                    await new Promise(resolve => setTimeout(resolve, streamDelay));
                 }
             };
 
@@ -328,6 +330,8 @@ const AIChat = ({ focusedProject }) => {
                                     onClick={() => setIsOpen(false)}
                                     className="text-gray-400 hover:text-white transition-colors"
                                     style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                                    title="Close Chat"
+                                    aria-label="Close Chat"
                                 >
                                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -463,6 +467,7 @@ const AIChat = ({ focusedProject }) => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
                 className="chat-fab"
+                aria-label="Ask AI"
             >
                 {isOpen ? (
                     <IoClose size={24} />

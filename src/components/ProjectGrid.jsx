@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaGithub, FaStar, FaCodeBranch, FaExternalLinkAlt } from "react-icons/fa";
 import repos from "../data/repos.json";
 
-const ProjectCard = ({ repo, index, onHover }) => {
+export const ProjectCard = ({ repo, index, onHover }) => {
   return (
     <motion.div
       onMouseEnter={() => onHover(repo)}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaHeart } from 'react-icons/fa';
 
 const Hero = () => {
   const [showFullName, setShowFullName] = useState(false);
@@ -79,12 +80,15 @@ const Hero = () => {
           </AnimatePresence>
         </div>
 
-        <div className="flex gap-4 justify-center">
-          <a href="https://github.com/jxoesneon" className="btn-primary">
+        <div className="flex gap-4 justify-center flex-wrap items-center">
+          <a href="https://github.com/jxoesneon" target="_blank" rel="noopener noreferrer" className="btn-primary">
             GitHub Profile
           </a>
           <a href="mailto:rj.joseeduardo@gmail.com" className="btn-secondary">
             Get in Touch
+          </a>
+          <a href="https://github.com/sponsors/jxoesneon" target="_blank" rel="noopener noreferrer" className="btn-sponsor">
+            <FaHeart className="text-sm" /> Sponsor
           </a>
         </div>
       </motion.div>

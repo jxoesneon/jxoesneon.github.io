@@ -125,6 +125,9 @@ async function fetchRepos() {
           description: repo.description,
           stargazerCount: repo.stargazers_count,
           updatedAt: repo.updated_at,
+          homepage: repo.homepage || null,
+          language: repo.language || null,
+          url: repo.html_url,
           repositoryTopics: (repo.topics && repo.topics.length > 0) ? repo.topics.map(t => ({ name: t })) : null,
           latestRelease
         };

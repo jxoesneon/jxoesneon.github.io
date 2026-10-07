@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaCode, FaEnvelope } from 'react-icons/fa';
-import { SiReact, SiVite, SiTailwindcss, SiFlutter, SiPython, SiDocker, SiTensorflow } from 'react-icons/si';
+import { FaGithub, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaHeart } from 'react-icons/fa';
+import { SiReact, SiVite, SiFlutter, SiPython, SiDocker, SiTensorflow, SiGithubsponsors, SiKofi } from 'react-icons/si';
 
 const BentoTile = ({ children, className = "", delay = 0 }) => (
   <motion.div
@@ -62,10 +62,33 @@ const BentoGrid = () => {
           </div>
         </BentoTile>
         
-        {/* Quote/Philosophy - Wide Tile */}
-         <BentoTile className="md:col-span-2 bg-gradient-to-r from-white/5 to-transparent" delay={0.5}>
-          <FaCode className="text-2xl text-neon-blue mb-4" />
-          <blockquote className="italic text-lg text-gray-300">"Code is the interface between imagination and reality."</blockquote>
+        {/* Support & Sponsors - Wide Tile */}
+        <BentoTile className="md:col-span-2 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-transparent border border-pink-500/20" delay={0.5}>
+          <div className="flex items-center gap-2 mb-2">
+            <FaHeart className="text-pink-400 text-xl" />
+            <h4 className="font-bold text-lg text-white">Support Open Source</h4>
+          </div>
+          <p className="text-sm text-gray-300 max-w-md mb-4">
+            Back independent research in decentralized infrastructure, MCP tooling, and neural architectures.
+          </p>
+          <div className="flex gap-3 flex-wrap justify-center">
+            <a
+              href="https://github.com/sponsors/jxoesneon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 text-xs font-semibold rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 hover:bg-pink-500/30 hover:border-pink-400 flex items-center gap-2 transition-all shadow-sm"
+            >
+              <SiGithubsponsors className="text-sm" /> GitHub Sponsors
+            </a>
+            <a
+              href="https://ko-fi.com/jxoesneon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 text-xs font-semibold rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 hover:border-amber-400 flex items-center gap-2 transition-all shadow-sm"
+            >
+              <SiKofi className="text-sm" /> Support on Ko-fi
+            </a>
+          </div>
         </BentoTile>
 
       </div>

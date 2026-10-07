@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
+import { FaGithub, FaStar, FaCodeBranch, FaExternalLinkAlt } from "react-icons/fa";
 import repos from "../data/repos.json";
 
 const ProjectCard = ({ repo, index, onHover }) => {
@@ -16,14 +16,28 @@ const ProjectCard = ({ repo, index, onHover }) => {
     >
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-bold text-neon-blue">{repo.name}</h3>
-        <a
-          href={`https://github.com/jxoesneon/${repo.name}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-400 hover:text-white transition-colors"
-        >
-          <FaGithub size={20} />
-        </a>
+        <div className="flex items-center gap-3">
+          {repo.homepage && (
+            <a
+              href={repo.homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-neon-green transition-colors"
+              title="Live Site / Demo"
+            >
+              <FaExternalLinkAlt size={16} />
+            </a>
+          )}
+          <a
+            href={repo.url || `https://github.com/jxoesneon/${repo.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            title="GitHub Repository"
+          >
+            <FaGithub size={20} />
+          </a>
+        </div>
       </div>
 
       <p className="text-gray-300 mb-4 flex-grow text-sm leading-relaxed">

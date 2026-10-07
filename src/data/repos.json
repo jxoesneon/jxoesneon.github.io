@@ -1,9 +1,581 @@
 [
   {
+    "name": "BioGenesis-X",
+    "description": "AAA 3D biopunk starship builder and void-flight combat simulator built with Godot 4.7.1. Real-scale universe, procedural generation, living ship systems, 6-DOF Newtonian flight, and hardware-aware performance optimization.",
+    "stargazerCount": 1,
+    "updatedAt": "2026-10-07T14:49:14Z",
+    "homepage": null,
+    "language": "GDScript",
+    "url": "https://github.com/jxoesneon/BioGenesis-X",
+    "repositoryTopics": [
+      {
+        "name": "6dof"
+      },
+      {
+        "name": "biopunk"
+      },
+      {
+        "name": "game-engine"
+      },
+      {
+        "name": "godot"
+      },
+      {
+        "name": "procedural-generation"
+      },
+      {
+        "name": "space-sim"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "MindWeave",
+    "description": "Open-source brainwave entrainment & binaural beats platform — enterprise architecture, neuroacoustic DSP specifications, and Flutter client design.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:10Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/MindWeave",
+    "repositoryTopics": [
+      {
+        "name": "audio-dsp"
+      },
+      {
+        "name": "binaural-beats"
+      },
+      {
+        "name": "brainwaves"
+      },
+      {
+        "name": "entrainment"
+      },
+      {
+        "name": "flutter"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "neuroscience"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "pynance",
+    "description": "Algorithmic trading prediction framework and financial time-series analysis engine utilizing machine learning in Python.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:08Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/pynance",
+    "repositoryTopics": [
+      {
+        "name": "algorithmic-trading"
+      },
+      {
+        "name": "finance"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "machine-learning"
+      },
+      {
+        "name": "predictions"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "time-series"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "pychem",
+    "description": "Computational chemistry suite in Python for molecular property calculations, stoichiometry balancing, and chemical data analysis.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:06Z",
+    "homepage": null,
+    "language": null,
+    "url": "https://github.com/jxoesneon/pychem",
+    "repositoryTopics": [
+      {
+        "name": "algorithms"
+      },
+      {
+        "name": "chemistry"
+      },
+      {
+        "name": "computational-chemistry"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "science"
+      },
+      {
+        "name": "stoichiometry"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "EvoSim",
+    "description": "Artificial life simulation engine in TypeScript combining neural network brains, physics, genetics, and natural selection ecosystems.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:04Z",
+    "homepage": null,
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/EvoSim",
+    "repositoryTopics": [
+      {
+        "name": "artificial-life"
+      },
+      {
+        "name": "evolution"
+      },
+      {
+        "name": "evolutionary-algorithms"
+      },
+      {
+        "name": "genetics"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "neural-networks"
+      },
+      {
+        "name": "simulation"
+      },
+      {
+        "name": "typescript"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "e2csv",
+    "description": "Webex Teams automation bot to extract, validate, deduplicate, and export batch email lists into structured CSV datasets.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:02Z",
+    "homepage": null,
+    "language": null,
+    "url": "https://github.com/jxoesneon/e2csv",
+    "repositoryTopics": [
+      {
+        "name": "bot"
+      },
+      {
+        "name": "csv"
+      },
+      {
+        "name": "data-processing"
+      },
+      {
+        "name": "email-parser"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "webex-teams"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "Dall-E-3-Client",
+    "description": "Full-featured Flask web interface and client pipeline for OpenAI DALL-E 3 image generation with secured API routing and prompt management.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:49:01Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/Dall-E-3-Client",
+    "repositoryTopics": [
+      {
+        "name": "dalle-3"
+      },
+      {
+        "name": "flask"
+      },
+      {
+        "name": "generative-ai"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "image-generation"
+      },
+      {
+        "name": "openai"
+      },
+      {
+        "name": "python"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "UltraWin-MCP",
+    "description": "High-performance Rust MCP server for Windows desktop automation, native accessibility tree navigation, and system-level LLM orchestration.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:59Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/UltraWin-MCP",
+    "repositoryTopics": [
+      {
+        "name": "accessibility"
+      },
+      {
+        "name": "automation"
+      },
+      {
+        "name": "desktop-automation"
+      },
+      {
+        "name": "mcp"
+      },
+      {
+        "name": "mcp-server"
+      },
+      {
+        "name": "rust"
+      },
+      {
+        "name": "windows"
+      }
+    ],
+    "latestRelease": {
+      "name": "UltraWin MCP v0.1.0",
+      "tagName": "v0.1.0",
+      "url": "https://github.com/jxoesneon/UltraWin-MCP/releases/tag/v0.1.0",
+      "publishedAt": "2026-06-03T03:31:47Z"
+    }
+  },
+  {
+    "name": "BioGenesis",
+    "description": "Procedural 3D biopunk living-ship construction engine in Three.js — synthesize, mutate, and pilot void-fauna with vascular and chitin systems.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:56Z",
+    "homepage": null,
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/BioGenesis",
+    "repositoryTopics": [
+      {
+        "name": "3d"
+      },
+      {
+        "name": "biopunk"
+      },
+      {
+        "name": "procedural-generation"
+      },
+      {
+        "name": "spaceship-builder"
+      },
+      {
+        "name": "threejs"
+      },
+      {
+        "name": "webgl"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "hermesbot",
+    "description": "Automated event notification bot and incident dispatch bridge for Cisco Webex Teams with scheduled webhook triggers.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:54Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/hermesbot",
+    "repositoryTopics": [
+      {
+        "name": "automation"
+      },
+      {
+        "name": "bot"
+      },
+      {
+        "name": "github-sponsors"
+      },
+      {
+        "name": "notifications"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "webex-teams"
+      },
+      {
+        "name": "webhooks"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "Faithful-HD2D",
+    "description": "Retro-modern HD-2D game rendering engine & canvas built with React 19, Pixi.js, Simplex noise terrain generation, and Gemini AI integration.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:53Z",
+    "homepage": null,
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/Faithful-HD2D",
+    "repositoryTopics": [
+      {
+        "name": "game-engine"
+      },
+      {
+        "name": "gemini-api"
+      },
+      {
+        "name": "hd-2d"
+      },
+      {
+        "name": "pixel-art"
+      },
+      {
+        "name": "pixi-js"
+      },
+      {
+        "name": "procedural-generation"
+      },
+      {
+        "name": "react"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "vibeveil",
+    "description": "Music-reactive dynamic wallpaper & ambient desktop theming daemon for Linux (Wayland & X11) synchronizing MPRIS audio with live shader palettes.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:51Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/vibeveil",
+    "repositoryTopics": [
+      {
+        "name": "audio-visualizer"
+      },
+      {
+        "name": "hyprland"
+      },
+      {
+        "name": "linux"
+      },
+      {
+        "name": "mpris"
+      },
+      {
+        "name": "rust"
+      },
+      {
+        "name": "wallpaper"
+      },
+      {
+        "name": "wayland"
+      }
+    ],
+    "latestRelease": {
+      "name": "v0.2.0",
+      "tagName": "v0.2.0",
+      "url": "https://github.com/jxoesneon/vibeveil/releases/tag/v0.2.0",
+      "publishedAt": "2026-09-16T20:01:00Z"
+    }
+  },
+  {
+    "name": "FerroUI",
+    "description": "AI-powered, server-driven UI meta-framework engineered for declarative component streaming and high-performance cross-platform rendering.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:49Z",
+    "homepage": "https://jxoesneon.github.io/FerroUI/",
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/FerroUI",
+    "repositoryTopics": [
+      {
+        "name": "ai"
+      },
+      {
+        "name": "declarative-ui"
+      },
+      {
+        "name": "frontend"
+      },
+      {
+        "name": "rust"
+      },
+      {
+        "name": "server-driven-ui"
+      },
+      {
+        "name": "ui-framework"
+      }
+    ],
+    "latestRelease": {
+      "name": "Release v2.0.0",
+      "tagName": "v2.0.0",
+      "url": "https://github.com/jxoesneon/FerroUI/releases/tag/v2.0.0",
+      "publishedAt": "2026-05-04T23:11:24Z"
+    }
+  },
+  {
+    "name": "ciel-ecc",
+    "description": "Execution & Coordination Core (ECC) for CIEL — deterministic autonomous agent orchestration, verification loops, and self-improving loops.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:47Z",
+    "homepage": null,
+    "language": "JavaScript",
+    "url": "https://github.com/jxoesneon/ciel-ecc",
+    "repositoryTopics": [
+      {
+        "name": "ai-agents"
+      },
+      {
+        "name": "autonomous-agents"
+      },
+      {
+        "name": "multi-agent"
+      },
+      {
+        "name": "orchestration"
+      },
+      {
+        "name": "python"
+      },
+      {
+        "name": "verification"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "Alexandria",
+    "description": "Local-first decentralized digital library and knowledge preservation vault built with Flutter, IPFS, client-side AES-256-GCM, and Tor routing.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:45Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/Alexandria",
+    "repositoryTopics": [
+      {
+        "name": "cryptography"
+      },
+      {
+        "name": "decentralized"
+      },
+      {
+        "name": "digital-library"
+      },
+      {
+        "name": "flutter"
+      },
+      {
+        "name": "ipfs"
+      },
+      {
+        "name": "privacy"
+      },
+      {
+        "name": "tor"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "ipfs_libp2p",
+    "description": "Production-grade, modular libp2p networking stack implemented in pure Dart, powering decentralized IPFS nodes and P2P protocols.",
+    "stargazerCount": 0,
+    "updatedAt": "2026-10-07T14:48:43Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/ipfs_libp2p",
+    "repositoryTopics": [
+      {
+        "name": "dart"
+      },
+      {
+        "name": "decentralized"
+      },
+      {
+        "name": "ipfs"
+      },
+      {
+        "name": "libp2p"
+      },
+      {
+        "name": "networking"
+      },
+      {
+        "name": "peer-to-peer"
+      },
+      {
+        "name": "web3"
+      }
+    ],
+    "latestRelease": null
+  },
+  {
+    "name": "aura-nx",
+    "description": "Enterprise Model Context Protocol (MCP) server for AAA Nintendo Switch (NX) development, console debugging, and runtime telemetry.",
+    "stargazerCount": 1,
+    "updatedAt": "2026-10-07T14:48:41Z",
+    "homepage": null,
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/aura-nx",
+    "repositoryTopics": [
+      {
+        "name": "debugging"
+      },
+      {
+        "name": "embedded-systems"
+      },
+      {
+        "name": "mcp"
+      },
+      {
+        "name": "mcp-server"
+      },
+      {
+        "name": "nintendo-switch"
+      },
+      {
+        "name": "reverse-engineering"
+      }
+    ],
+    "latestRelease": {
+      "name": "v2.4.2",
+      "tagName": "v2.4.2",
+      "url": "https://github.com/jxoesneon/aura-nx/releases/tag/v2.4.2",
+      "publishedAt": "2026-05-20T15:36:22Z"
+    }
+  },
+  {
     "name": "martensite",
     "description": "The sovereign, retained-mode, GPU-accelerated graphical user interface engine for Rust.",
     "stargazerCount": 1,
     "updatedAt": "2026-10-07T12:07:09Z",
+    "homepage": "https://docs.rs/martensite",
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/martensite",
     "repositoryTopics": [
       {
         "name": "accessibility"
@@ -48,6 +620,9 @@
     "description": "Enterprise-grade autonomous partner intelligence for multi-agent software engineering. Harmonized cognitive layer with Council governance and the Iron Law of verification.",
     "stargazerCount": 1,
     "updatedAt": "2026-10-07T11:46:58Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/Ciel",
     "repositoryTopics": [
       {
         "name": "agentic-workflows"
@@ -83,6 +658,9 @@
     "description": "Native Wayland & PipeWire Host for Google Chrome Remote Desktop on Hyprland",
     "stargazerCount": 3,
     "updatedAt": "2026-10-07T01:46:04Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/hyprCRD",
     "repositoryTopics": null,
     "latestRelease": {
       "name": "v1.0.0",
@@ -96,6 +674,9 @@
     "description": "A high-performance, local, offline-first AI memory system built in Rust",
     "stargazerCount": 37,
     "updatedAt": "2026-10-03T15:30:07Z",
+    "homepage": "https://crates.io/crates/mempalace-rs",
+    "language": "HTML",
+    "url": "https://github.com/jxoesneon/mempalace-rs",
     "repositoryTopics": [
       {
         "name": "ai"
@@ -131,6 +712,9 @@
     "description": "The premier Model Context Protocol (MCP) server for macOS desktop automation. Enterprise-grade, secure, and fully verified.",
     "stargazerCount": 0,
     "updatedAt": "2026-10-03T01:48:10Z",
+    "homepage": null,
+    "language": "TypeScript",
+    "url": "https://github.com/jxoesneon/ultramac-mcp",
     "repositoryTopics": [
       {
         "name": "automation"
@@ -166,6 +750,9 @@
     "description": "Production-ready IPFS implementation in Dart with full protocol support, P2P networking, Gateway mode, and offline capabilities. Supports mobile (Flutter) and web platforms.",
     "stargazerCount": 11,
     "updatedAt": "2026-09-23T05:17:51Z",
+    "homepage": "https://pub.dev/packages/dart_ipfs",
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/IPFS",
     "repositoryTopics": [
       {
         "name": "bitswap"
@@ -209,23 +796,13 @@
     }
   },
   {
-    "name": "aura-nx",
-    "description": null,
-    "stargazerCount": 1,
-    "updatedAt": "2026-09-22T18:02:33Z",
-    "repositoryTopics": null,
-    "latestRelease": {
-      "name": "v2.4.2",
-      "tagName": "v2.4.2",
-      "url": "https://github.com/jxoesneon/aura-nx/releases/tag/v2.4.2",
-      "publishedAt": "2026-05-20T15:36:22Z"
-    }
-  },
-  {
     "name": "tycho",
     "description": "Autonomous low-latency voice assistant for Linux compositors (Hyprland, KDE Plasma, Wayland/X11) built in Rust",
     "stargazerCount": 0,
     "updatedAt": "2026-09-21T12:02:10Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/tycho",
     "repositoryTopics": null,
     "latestRelease": {
       "name": "v0.3.0",
@@ -235,18 +812,13 @@
     }
   },
   {
-    "name": "ipfs_libp2p",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-21T05:05:12Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
     "name": "quic_lib",
     "description": "A pure-Dart QUIC, HTTP/3, WebTransport, and libp2p transport stack.",
     "stargazerCount": 0,
     "updatedAt": "2026-09-18T06:31:34Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/quic_lib",
     "repositoryTopics": null,
     "latestRelease": {
       "name": "v1.2.3 - Honest platform support + WASM compile compatibility",
@@ -256,18 +828,13 @@
     }
   },
   {
-    "name": "Alexandria",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-18T04:52:59Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
     "name": "oxidelink",
     "description": "Nintendo Switch controller remapping for Windows — Tauri 2 + Vite + ViGEmBus + HidHide + gyro mouse + flick stick + amiibo + macros",
     "stargazerCount": 0,
     "updatedAt": "2026-09-18T04:42:30Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/oxidelink",
     "repositoryTopics": [
       {
         "name": "amiibo"
@@ -318,25 +885,41 @@
         "name": "xinput"
       }
     ],
-    "latestRelease": null
+    "latestRelease": {
+      "name": "OxideLink v0.2.0",
+      "tagName": "v0.2.0",
+      "url": "https://github.com/jxoesneon/oxidelink/releases/tag/v0.2.0",
+      "publishedAt": "2026-09-02T11:40:42Z"
+    }
   },
   {
     "name": "SeedSphere",
     "description": "SeedSphere Stremio Tracker Addon - robust tracker health validation, recent boosts panel, Fly.io deployment",
     "stargazerCount": 6,
     "updatedAt": "2026-09-18T03:36:54Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/SeedSphere",
     "repositoryTopics": [
       {
         "name": "github-sponsors"
       }
     ],
-    "latestRelease": null
+    "latestRelease": {
+      "name": "v2.3.22",
+      "tagName": "v2.3.22",
+      "url": "https://github.com/jxoesneon/SeedSphere/releases/tag/v2.3.22",
+      "publishedAt": "2026-05-27T23:14:10Z"
+    }
   },
   {
     "name": "gemini-audio-mcp",
     "description": "A high-performance Model Context Protocol (MCP) server in Rust that generates infinite, context-aware environmental soundscapes and professional audio using Gemini 2.0 Multimodal Live API.",
     "stargazerCount": 0,
     "updatedAt": "2026-09-18T03:30:06Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/gemini-audio-mcp",
     "repositoryTopics": [
       {
         "name": "ai-agents"
@@ -393,13 +976,21 @@
         "name": "soundscape"
       }
     ],
-    "latestRelease": null
+    "latestRelease": {
+      "name": "v0.1.1",
+      "tagName": "v0.1.1",
+      "url": "https://github.com/jxoesneon/gemini-audio-mcp/releases/tag/v0.1.1",
+      "publishedAt": "2026-04-05T14:24:56Z"
+    }
   },
   {
     "name": "dart_lz4",
     "description": "Pure Dart LZ4 + LZ4HC (block + frame) with streaming support and pub.dev publishing via CI.",
     "stargazerCount": 0,
     "updatedAt": "2026-09-18T03:29:58Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/dart_lz4",
     "repositoryTopics": [
       {
         "name": "codec"
@@ -450,29 +1041,21 @@
         "name": "xxhash"
       }
     ],
-    "latestRelease": null
-  },
-  {
-    "name": "ciel-ecc",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-18T03:29:39Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
-    "name": "FerroUI",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-18T03:29:25Z",
-    "repositoryTopics": null,
-    "latestRelease": null
+    "latestRelease": {
+      "name": "v1.4.0",
+      "tagName": "v1.4.0",
+      "url": "https://github.com/jxoesneon/dart_lz4/releases/tag/v1.4.0",
+      "publishedAt": "2026-09-13T02:35:07Z"
+    }
   },
   {
     "name": "ultranix-mcp",
     "description": "Rust MCP server for Linux desktop automation — Wayland/Hyprland-first, UltraWin skeleton, UltraMac surface",
     "stargazerCount": 0,
     "updatedAt": "2026-09-17T15:33:53Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/ultranix-mcp",
     "repositoryTopics": [
       {
         "name": "automation"
@@ -502,21 +1085,21 @@
         "name": "wayland"
       }
     ],
-    "latestRelease": null
-  },
-  {
-    "name": "vibeveil",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-16T20:12:34Z",
-    "repositoryTopics": null,
-    "latestRelease": null
+    "latestRelease": {
+      "name": "v1.4.0",
+      "tagName": "v1.4.0",
+      "url": "https://github.com/jxoesneon/ultranix-mcp/releases/tag/v1.4.0",
+      "publishedAt": "2026-09-16T20:26:38Z"
+    }
   },
   {
     "name": "hermes-ciel-theme",
     "description": "Official Ciel skin for Hermes Agent CLI — Cosmic void, ice-cyan circle-light, white robe, crimson gaze.",
     "stargazerCount": 0,
     "updatedAt": "2026-09-12T21:33:49Z",
+    "homepage": null,
+    "language": "Python",
+    "url": "https://github.com/jxoesneon/hermes-ciel-theme",
     "repositoryTopics": [
       {
         "name": "ascii-art"
@@ -550,26 +1133,29 @@
     "description": "FerroTeX: research-driven LaTeX language platform + TeX build observability (docs/spec-first).",
     "stargazerCount": 3,
     "updatedAt": "2026-09-11T05:15:25Z",
+    "homepage": null,
+    "language": "Rust",
+    "url": "https://github.com/jxoesneon/FerroTeX",
     "repositoryTopics": [
       {
         "name": "github-sponsors"
       }
     ],
-    "latestRelease": null
-  },
-  {
-    "name": "Faithful-HD2D",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-07T14:22:22Z",
-    "repositoryTopics": null,
-    "latestRelease": null
+    "latestRelease": {
+      "name": "v0.25.0",
+      "tagName": "v0.25.0",
+      "url": "https://github.com/jxoesneon/FerroTeX/releases/tag/v0.25.0",
+      "publishedAt": "2026-09-11T04:24:58Z"
+    }
   },
   {
     "name": "NSPFF",
     "description": "High-performance native Flutter application for generating Nintendo Switch NSP forwarders (NRO & RetroArch shortcuts).",
     "stargazerCount": 1,
     "updatedAt": "2026-09-03T00:39:18Z",
+    "homepage": null,
+    "language": "Dart",
+    "url": "https://github.com/jxoesneon/NSPFF",
     "repositoryTopics": [
       {
         "name": "android"
@@ -599,30 +1185,13 @@
     "latestRelease": null
   },
   {
-    "name": "hermesbot",
-    "description": "A timely notifier.",
-    "stargazerCount": 0,
-    "updatedAt": "2026-09-02T01:07:26Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "BioGenesis",
-    "description": "3d bio spaceship builder ",
-    "stargazerCount": 0,
-    "updatedAt": "2026-08-31T10:26:09Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
     "name": "godot-mcp",
     "description": "MCP server for interfacing with Godot game engine. Provides tools for launching the editor, running projects, and capturing debug output.",
     "stargazerCount": 0,
     "updatedAt": "2026-08-31T06:59:42Z",
+    "homepage": null,
+    "language": "GDScript",
+    "url": "https://github.com/jxoesneon/godot-mcp",
     "repositoryTopics": [
       {
         "name": "ai-tools"
@@ -638,103 +1207,6 @@
       },
       {
         "name": "mcp"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "BioGenesis-X",
-    "description": "AAA 3D biopunk starship builder and void-flight combat simulator built with Godot 4.7.1. Real-scale universe, procedural generation, living ship systems, 6-DOF Newtonian flight, and hardware-aware performance optimization.",
-    "stargazerCount": 1,
-    "updatedAt": "2026-08-31T06:44:22Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
-    "name": "UltraWin-MCP",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-06-03T04:04:47Z",
-    "repositoryTopics": null,
-    "latestRelease": null
-  },
-  {
-    "name": "Dall-E-3-Client",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:37:02Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "e2csv",
-    "description": "Webex Team bot to convert a list of emails to a csv file",
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:36:52Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "EvoSim",
-    "description": "Evolutionary simulation engine in TypeScript",
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:36:39Z",
-    "repositoryTopics": [
-      {
-        "name": "evolutionary-algorithms"
-      },
-      {
-        "name": "github-sponsors"
-      },
-      {
-        "name": "simulation"
-      },
-      {
-        "name": "typescript"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "pychem",
-    "description": "A compilation of chemistry tools",
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:36:07Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "pynance",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:35:46Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
-      }
-    ],
-    "latestRelease": null
-  },
-  {
-    "name": "MindWeave",
-    "description": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-04-03T20:31:18Z",
-    "repositoryTopics": [
-      {
-        "name": "github-sponsors"
       }
     ],
     "latestRelease": null

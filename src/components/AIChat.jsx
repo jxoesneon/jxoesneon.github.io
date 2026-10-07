@@ -10,7 +10,62 @@ import reposData from '../data/repos.json';
 import experienceData from '../data/experience.json';
 import './AIChat.css';
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyDD_EwrouoL7zwyFvOOaBPkgQFDoVrAR-4";
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
+const CANDIDATE_MODELS = ["gemini-2.5-flash", "gemini-1.5-flash"];
+
+async function callOpenRouterFallback(systemPrompt, cleanHistory, textToSend) {
+    if (!OPENROUTER_API_KEY) {
+        throw new Error("No OpenRouter API key configured.");
+    }
+
+    const messages = [
+        { role: "system", content: systemPrompt },
+        ...cleanHistory.map(m => ({
+            role: m.role === 'model' ? 'assistant' : 'user',
+            content: m.parts ? m.parts[0].text : m.text
+        })),
+        { role: "user", content: textToSend }
+    ];
+
+    const models = [
+        "openrouter/auto",
+        "google/gemini-2.0-flash-lite-preview-02-05:free",
+        "meta-llama/llama-3.3-70b-instruct:free"
+    ];
+
+    let lastError = null;
+    for (const model of models) {
+        try {
+            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "https://jxoesneon.github.io/",
+                    "X-Title": "jxoesneon portfolio"
+                },
+                body: JSON.stringify({
+                    model: model,
+                    messages: messages
+                })
+            });
+
+            if (!res.ok) {
+                const errText = await res.text();
+                throw new Error(`OpenRouter ${res.status}: ${errText}`);
+            }
+
+            const data = await res.json();
+            const reply = data.choices?.[0]?.message?.content;
+            if (reply) return { text: reply, modelName: model };
+        } catch (e) {
+            lastError = e;
+            console.warn(`OpenRouter model ${model} failed:`, e.message);
+        }
+    }
+    throw lastError || new Error("All OpenRouter fallback models exhausted.");
+}
 
 // System Context construction
 const SYSTEM_PROMPT = `
@@ -82,6 +137,7 @@ const AIChat = ({ focusedProject }) => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [loadingStatus, setLoadingStatus] = useState('');
+    const [activeModel, setActiveModel] = useState('Online • Gemini 2.5 Flash');
     const messagesEndRef = useRef(null);
 
     // Update SYSTEM_PROMPT dynamically if focusedProject changes
@@ -95,7 +151,6 @@ const AIChat = ({ focusedProject }) => {
 
     // Thinking animation effect
     useEffect(() => {
-        // ... (existing effect logic)
         let interval;
         if (isLoading) {
             setLoadingStatus(THINKING_STEPS[0]);
@@ -118,70 +173,74 @@ const AIChat = ({ focusedProject }) => {
         setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
         setIsLoading(true);
 
-        const genAI = new GoogleGenerativeAI(API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-        // Helper to attempt sending with retries and shrinking context
-        const callGeminiWithRetry = async (contextLimit = 10, attempts = 0) => {
-            try {
-                // Base History (System + Ack)
-                const history = [
-                    { role: "user", parts: [{ text: systemPrompt }] },
-                    { role: "model", parts: [{ text: "Acknowledged. I am ready to represent Jose's portfolio." }] }
-                ];
-                // ... (rest of the handleSend logic)
-
-
-                // Add recent messages based on current limit
-                const recentMessages = messages.slice(1).slice(-contextLimit);
-                recentMessages.forEach(msg => {
-                    history.push({
+        // Core multi-tiered AI dispatcher (Gemini primary -> OpenRouter auto/free fallback)
+        const callAI = async (contextLimit = 10) => {
+            // Build clean history excluding system error messages
+            const cleanHistory = [];
+            const previousMessages = messages.slice(1).slice(-contextLimit);
+            previousMessages.forEach(msg => {
+                if (msg.text && !msg.text.startsWith("Error:") && !msg.text.startsWith("My neural link") && !msg.text.startsWith("Notice:")) {
+                    cleanHistory.push({
                         role: msg.role === 'user' ? 'user' : 'model',
                         parts: [{ text: msg.text }]
                     });
-                });
-
-                const chat = model.startChat({ history });
-                const result = await chat.sendMessage(textToSend);
-                return result.response.text();
-
-            } catch (error) {
-                // If we have retries left and it's a likely temporary error (429/503)
-                // Retry up to 3 times (Total wait ~9s + execution time > 10s)
-                if (attempts < 3 && (error.message?.includes('429') || error.message?.includes('503'))) {
-                    console.warn(`Retry attempt ${attempts + 1}: Reducing context to ${Math.floor(contextLimit / 2)}`);
-                    
-                    // Use a varied retry message
-                    const retryMsg = RETRY_MESSAGES[attempts % RETRY_MESSAGES.length] || `Optimizing signal (Attempt ${attempts + 1}/3)...`;
-                    setLoadingStatus(retryMsg);
-                    
-                    // Wait 3 seconds before retry
-                    await new Promise(resolve => setTimeout(resolve, 3000));
-                    
-                    // Retry with half the context
-                    return callGeminiWithRetry(Math.floor(contextLimit / 2), attempts + 1);
                 }
-                throw error;
+            });
+
+            let geminiError = null;
+
+            // Tier 1: Google Gemini (Direct API)
+            if (GEMINI_API_KEY) {
+                const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+                for (const modelName of CANDIDATE_MODELS) {
+                    try {
+                        const model = genAI.getGenerativeModel({
+                            model: modelName,
+                            systemInstruction: systemPrompt
+                        });
+
+                        const chat = model.startChat({ history: cleanHistory });
+                        const result = await chat.sendMessage(textToSend);
+                        setActiveModel(`Online • Gemini 2.5 Flash`);
+                        return result.response.text();
+                    } catch (error) {
+                        geminiError = error;
+                        console.warn(`Gemini (${modelName}) failed:`, error.message);
+                        if (error.message?.includes('404') || error.message?.includes('not found')) {
+                            continue;
+                        }
+                        // Quota/referer/network error: proceed to OpenRouter fallback
+                        break;
+                    }
+                }
+            }
+
+            // Tier 2: OpenRouter (Auto / Free models fallback)
+            console.warn("Primary Gemini model unavailable or blocked. Engaging OpenRouter fallback relay...");
+            setLoadingStatus("Connecting via OpenRouter fallback relay...");
+
+            try {
+                const openRouterRes = await callOpenRouterFallback(systemPrompt, cleanHistory, textToSend);
+                setActiveModel(`Online • OpenRouter (${openRouterRes.modelName.includes('free') ? 'Free' : 'Auto'})`);
+                return openRouterRes.text;
+            } catch (openRouterError) {
+                console.error("OpenRouter fallback also failed:", openRouterError);
+                throw geminiError || openRouterError;
             }
         };
 
         try {
-            // Initial delay for "Thinking" animation (minimum 2s)
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            const response = await callGeminiWithRetry(10); // Start with last 10 messages
+            const response = await callAI(10);
             
             // STREAMING EFFECT
-            // 1. Add placeholder empty message
             setMessages(prev => [...prev, { role: 'model', text: '' }]);
             
-            // 2. Stream text character by character
             const streamText = async (text) => {
-                const chunkSize = 3; // Characters per tick (tuned for speed/performance balance)
+                const chunkSize = 3;
                 for (let i = 0; i < text.length; i += chunkSize) {
                     const chunk = text.slice(i, i + chunkSize);
-                    
-                    // Use functional update to append to the VERY LAST message
                     setMessages(prev => {
                         const newMsgs = [...prev];
                         const lastMsgIndex = newMsgs.length - 1;
@@ -193,8 +252,6 @@ const AIChat = ({ focusedProject }) => {
                         }
                         return newMsgs;
                     });
-                    
-                    // Terminal typing speed
                     await new Promise(resolve => setTimeout(resolve, 15));
                 }
             };
@@ -204,10 +261,15 @@ const AIChat = ({ focusedProject }) => {
         } catch (error) {
             console.error("AI Error:", error);
             let errorMessage = "Error: Connection interrupted. Please try again.";
-            
-            if (error.message?.includes('429') || error.message?.includes('503')) {
-                // Friendly Fallback for Rate Limits
+            const errMsg = error.message || '';
+            const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+            if (errMsg.includes('API_KEY_HTTP_REFERRER_BLOCKED') || (errMsg.includes('403') && isLocal)) {
+                errorMessage = "Notice: The production Gemini API key has an HTTP Referrer restriction set to https://jxoesneon.github.io. Localhost access is blocked by Google Cloud origin policy, but it operates normally on the live deployment.";
+            } else if (errMsg.includes('429') || errMsg.includes('RESOURCE_EXHAUSTED')) {
                 errorMessage = "My neural link is currently at max capacity with incoming signals! 🧠✨ \n\nWhile I re-calibrate my processors, I invite you to explore the [Experience Timeline](#experience) or check out the full source code on [GitHub](https://github.com/jxoesneon).";
+            } else if (errMsg.includes('503') || errMsg.includes('Service Unavailable')) {
+                errorMessage = "The AI network is temporarily experiencing high latency. Please retry your message in a few moments.";
             }
 
             setMessages(prev => [...prev, { role: 'model', text: errorMessage }]);
@@ -266,7 +328,7 @@ const AIChat = ({ focusedProject }) => {
 
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <span style={{ fontWeight: 'bold', fontSize: '14px' }}>AI Assistant</span>
-                                    <span style={{ fontSize: '12px', color: 'var(--neon-blue)' }}>Online • Gemini 2.5 Flash</span>
+                                    <span style={{ fontSize: '12px', color: 'var(--neon-blue)' }}>{activeModel}</span>
                                 </div>
                             </div>
                         </div>

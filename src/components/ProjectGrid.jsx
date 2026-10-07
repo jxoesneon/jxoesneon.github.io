@@ -63,10 +63,11 @@ const ProjectCard = ({ repo, index, onHover }) => {
 const ProjectGrid = ({ onProjectHover }) => {
   // Categorize repositories dynamically
   const mcpRepos = repos.filter((r) => 
-    r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp'))
+    r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp')) ||
+    r.name.toLowerCase().includes('mcp')
   );
   const featuredRepos = repos.filter((r) => 
-    !r.repositoryTopics?.some(t => t.name.toLowerCase().includes('mcp'))
+    !mcpRepos.some(m => m.name === r.name)
   );
 
   return (

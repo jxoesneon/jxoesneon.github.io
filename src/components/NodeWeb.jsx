@@ -23,7 +23,7 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
   const animationFrameId = useRef();
   const pointsRef = useRef([]);
   const targetRef = useRef({ x: 0, y: 0 });
-  const animateHeaderRef = useRef(true);
+  const _animateHeaderRef = useRef(true);
 
   const getDistance = (p1, p2) => Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
 
@@ -44,7 +44,7 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
     }
   }, [theme]);
 
-  const shiftPoint = useCallback((p) => {
+  const shiftPoint = useCallback(function doShiftPoint(p) {
     const duration = 1 + Math.random();
     const targetX = p.originX - 50 + Math.random() * 100;
     const targetY = p.originY - 50 + Math.random() * 100;
@@ -64,13 +64,13 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
       } else {
         p.x = targetX;
         p.y = targetY;
-        shiftPoint(p);
+        doShiftPoint(p);
       }
     };
     requestAnimationFrame(animatePoint);
   }, []);
 
-  const animate = useCallback(() => {
+  const animate = useCallback(function runAnimate() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -86,7 +86,7 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
       drawLines(p, ctx);
       p.circle.draw(ctx, theme);
     }
-    animationFrameId.current = requestAnimationFrame(animate);
+    animationFrameId.current = requestAnimationFrame(runAnimate);
   }, [drawLines, theme]);
 
   const initHeader = useCallback(() => {

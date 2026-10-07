@@ -14,7 +14,7 @@ function App() {
   const lastUpdated = new Date(Math.max(...repos.map(r => new Date(r.updatedAt)))).toLocaleDateString();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans relative overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-[#08090d] text-slate-100 font-sans relative overflow-hidden flex flex-col">
       <NodeWeb />
       <main className="relative z-10 flex-grow">
         <Hero />
@@ -24,15 +24,15 @@ function App() {
         <AIChat focusedProject={focusedProject} />
       </main>
       
-      <footer className="relative z-10 py-8 text-center text-gray-500 text-sm border-t border-white/10 glass-card mx-4 mb-4 mt-20">
+      <footer className="relative z-10 py-8 text-center text-slate-500 text-sm border-t border-white/5 glass-card mx-4 mb-4 mt-20">
         <p>© {new Date().getFullYear()} Jose Eduardo Rojas Jimenez. Built with React & Vite.</p>
-        <p className="mt-2 text-xs">Last Portfolio Sync: {lastUpdated}</p>
+        <p className="mt-2 text-xs text-slate-600">Last Portfolio Sync: {lastUpdated}</p>
         <div className="flex justify-center gap-6 mt-4 items-center flex-wrap">
           <a
             href="https://github.com/jxoesneon"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-neon-blue transition-colors flex items-center gap-1.5"
+            className="hover:text-slate-200 text-slate-400 transition-colors flex items-center gap-1.5"
           >
             <FaGithub /> GitHub
           </a>
@@ -40,7 +40,7 @@ function App() {
             href="https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-neon-blue transition-colors flex items-center gap-1.5"
+            className="hover:text-slate-200 text-slate-400 transition-colors flex items-center gap-1.5"
           >
             <FaLinkedin /> LinkedIn
           </a>
@@ -48,7 +48,7 @@ function App() {
             href="https://github.com/sponsors/jxoesneon"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-pink-400 text-pink-400/90 transition-colors flex items-center gap-1.5"
+            className="hover:text-rose-300 text-rose-400/80 transition-colors flex items-center gap-1.5"
           >
             <SiGithubsponsors /> GitHub Sponsors
           </a>
@@ -56,7 +56,7 @@ function App() {
             href="https://ko-fi.com/jxoesneon"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-amber-400 text-amber-400/90 transition-colors flex items-center gap-1.5"
+            className="hover:text-amber-300 text-amber-400/80 transition-colors flex items-center gap-1.5"
           >
             <SiKofi /> Ko-fi
           </a>

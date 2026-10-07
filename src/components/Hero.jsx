@@ -7,10 +7,10 @@ const Hero = () => {
   const [taglineIndex, setTaglineIndex] = useState(0);
 
   const taglines = [
-    "Building the bridge between Artificial Intelligence and Desktop Reality via the Model Context Protocol.",
+    "Building bridges between artificial intelligence and local systems via the Model Context Protocol.",
     "Pioneering decentralized infrastructure with IPFS and peer-to-peer networks.",
-    "Revolutionizing creative workflows with AI-driven automation for Blender and Unreal Engine 5.",
-    "Engineering next-generation tools for research, simulation, and decentralized compute."
+    "Developing automation tooling for spatial 3D pipelines in Blender and Unreal Engine.",
+    "Architecting research tools, systems programming, and high-performance developer utilities."
   ];
 
   useEffect(() => {
@@ -30,15 +30,15 @@ const Hero = () => {
 
   return (
     <section className="min-h-[80vh] flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-neon-purple/20 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-radial pointer-events-none" />
       
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.6 }}
         className="z-10 w-full max-w-4xl"
       >
-        <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-neon-blue text-sm mb-6 backdrop-blur-md">
+        <span className="inline-block py-1 px-3.5 rounded-full bg-white/[0.03] border border-white/10 text-slate-300 text-xs tracking-wide uppercase font-medium mb-6 backdrop-blur-md">
           Decentralized Systems & AI
         </span>
         
@@ -47,13 +47,13 @@ const Hero = () => {
           <AnimatePresence mode="wait">
             <motion.span
               key={showFullName ? "full" : "nick"}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
               className="pb-2 min-h-[1.2em] block font-bold"
               style={{
-                backgroundImage: 'linear-gradient(to right, #00f3ff, #bc13fe)',
+                backgroundImage: 'linear-gradient(180deg, #ffffff 15%, #94a3b8 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

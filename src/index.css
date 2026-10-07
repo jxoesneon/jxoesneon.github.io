@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
 
 :root {
-  --neon-blue: #00f3ff;
-  --neon-purple: #bc13fe;
-  --neon-green: #0aff68;
-  --bg-dark: #050505;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.05);
+  --neon-blue: #38bdf8;
+  --neon-purple: #818cf8;
+  --neon-green: #34d399;
+  --bg-dark: #08090d;
+  --glass-bg: rgba(255, 255, 255, 0.025);
+  --glass-border: rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -15,10 +15,12 @@
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-dark);
-  color: #ffffff;
+  color: #f1f5f9;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Utilities */
@@ -37,15 +39,16 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  background: linear-gradient(180deg, #ffffff 15%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .bg-gradient-radial {
   background: radial-gradient(
     circle at center,
-    var(--tw-gradient-from),
+    rgba(129, 140, 248, 0.08),
     transparent 70%
   );
 }
@@ -53,69 +56,105 @@ body {
 /* Glassmorphism */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
 }
 
 .glass-card:hover {
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* Buttons */
 .btn-primary {
-  padding: 12px 32px;
-  background: white;
-  color: black;
-  font-weight: 600;
+  padding: 10px 24px;
+  background: #f8fafc;
+  color: #090a0f;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
   border-radius: 9999px;
   text-decoration: none;
-  transition: transform 0.2s;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
-  padding: 12px 32px;
-  background: transparent;
-  color: white;
-  border: 1px solid white;
-  font-weight: 600;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
   border-radius: 9999px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
 }
 
 .btn-sponsor {
-  padding: 12px 28px;
-  background: rgba(235, 54, 120, 0.12);
-  color: #ff6097;
-  border: 1px solid rgba(255, 96, 151, 0.35);
-  font-weight: 600;
+  padding: 10px 22px;
+  background: rgba(244, 114, 182, 0.05);
+  color: #f472b6;
+  border: 1px solid rgba(244, 114, 182, 0.2);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
   border-radius: 9999px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
 }
 
 .btn-sponsor:hover {
-  background: rgba(235, 54, 120, 0.28);
-  border-color: #ff6097;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 16px rgba(255, 96, 151, 0.45);
+  background: rgba(244, 114, 182, 0.1);
+  border-color: rgba(244, 114, 182, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-sponsor:active {
+  transform: translateY(0);
 }
 
 /* Tailwind Utilities (shim since we are not using full tailwind build but using utility classes in JSX) */

@@ -12,17 +12,17 @@ export const ProjectCard = ({ repo, index, onHover }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="glass-card p-6 flex flex-col h-full hover:scale-105 transition-transform duration-300"
+      className="glass-card p-6 flex flex-col h-full hover:scale-[1.015] hover:-translate-y-1 transition-all duration-300"
     >
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-bold text-neon-blue">{repo.name}</h3>
+        <h3 className="text-xl font-semibold text-white tracking-tight">{repo.name}</h3>
         <div className="flex items-center gap-3">
           {repo.homepage && (
             <a
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-neon-green transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
               title="Live Site / Demo"
             >
               <FaExternalLinkAlt size={16} />
@@ -49,7 +49,7 @@ export const ProjectCard = ({ repo, index, onHover }) => {
           {repo.repositoryTopics.slice(0, 3).map((topic, i) => (
             <span
               key={i}
-              className="px-2 py-1 text-xs rounded-full bg-white/10 text-neon-purple border border-white/5"
+              className="px-2.5 py-1 text-xs rounded-full bg-white/[0.04] text-slate-300 border border-white/5 font-medium"
             >
               {topic.name}
             </span>
@@ -59,7 +59,7 @@ export const ProjectCard = ({ repo, index, onHover }) => {
 
       <div className="flex items-center gap-4 text-xs text-gray-500 mt-auto pt-4 border-t border-white/10">
         {repo.latestRelease && (
-          <span className="flex items-center gap-1 text-neon-green">
+          <span className="flex items-center gap-1 text-emerald-400 font-medium">
             <FaCodeBranch /> {repo.latestRelease.tagName}
           </span>
         )}

@@ -23,70 +23,74 @@ const BentoGrid = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]">
         {/* Socials - Large Tile */}
         <BentoTile className="md:col-span-2 md:row-span-2" delay={0.1}>
-           <h3 className="text-2xl font-bold mb-6">Let's Collaborate</h3>
-           <p className="text-gray-400 mb-8 max-w-md">Open to discussing Decentralized AI, Model Context Protocol, and the future of software.</p>
+           <h3 className="text-2xl font-bold mb-4 tracking-tight">Let's Collaborate</h3>
+           <p className="text-gray-400 mb-8 max-w-md text-sm leading-relaxed">Open to conversations regarding systems architecture, Model Context Protocol tooling, and technical research.</p>
            <div className="flex gap-6">
-             <a href="https://github.com/jxoesneon" className="text-4xl hover:text-neon-blue transition-colors"><FaGithub /></a>
-             <a href="https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/" className="text-4xl hover:text-neon-blue transition-colors"><FaLinkedin /></a>
-             <a href="mailto:rj.joseeduardo@gmail.com" className="text-4xl hover:text-neon-blue transition-colors"><FaEnvelope /></a>
+             <a href="https://github.com/jxoesneon" aria-label="GitHub Profile" className="text-3xl text-gray-400 hover:text-white transition-colors"><FaGithub /></a>
+             <a href="https://www.linkedin.com/in/jose-eduardo-rojas-jiménez-0a8284b1/" aria-label="LinkedIn Profile" className="text-3xl text-gray-400 hover:text-white transition-colors"><FaLinkedin /></a>
+             <a href="mailto:rj.joseeduardo@gmail.com" aria-label="Send Email" className="text-3xl text-gray-400 hover:text-white transition-colors"><FaEnvelope /></a>
            </div>
         </BentoTile>
 
         {/* Tech Stack - Tall Tile */}
         <BentoTile className="md:row-span-2" delay={0.2}>
-          <h3 className="text-xl font-bold mb-6 text-neon-green">Tech Stack</h3>
+          <h3 className="text-xl font-semibold mb-6 text-white tracking-tight">Tech Stack</h3>
           <div className="flex flex-wrap justify-center gap-4 text-3xl text-gray-400">
-            <SiReact className="hover:text-[#61DAFB] transition-colors" title="React" />
-            <SiVite className="hover:text-[#646CFF] transition-colors" title="Vite" />
-            <SiFlutter className="hover:text-[#02569B] transition-colors" title="Flutter" />
-            <SiPython className="hover:text-[#3776AB] transition-colors" title="Python" />
-            <SiDocker className="hover:text-[#2496ED] transition-colors" title="Docker" />
-            <SiTensorflow className="hover:text-[#FF6F00] transition-colors" title="TensorFlow" />
+            <SiReact className="hover:text-slate-200 transition-colors" title="React" />
+            <SiVite className="hover:text-slate-200 transition-colors" title="Vite" />
+            <SiFlutter className="hover:text-slate-200 transition-colors" title="Flutter" />
+            <SiPython className="hover:text-slate-200 transition-colors" title="Python" />
+            <SiDocker className="hover:text-slate-200 transition-colors" title="Docker" />
+            <SiTensorflow className="hover:text-slate-200 transition-colors" title="TensorFlow" />
           </div>
         </BentoTile>
 
         {/* Location - Small Tile */}
         <BentoTile delay={0.3}>
-          <FaMapMarkerAlt className="text-3xl text-neon-purple mb-2" />
-          <h4 className="font-bold">Costa Rica</h4>
+          <FaMapMarkerAlt className="text-2xl text-slate-400 mb-2" />
+          <h4 className="font-semibold text-white">Costa Rica</h4>
           <p className="text-sm text-gray-400">UTC-6 (CST)</p>
         </BentoTile>
 
          {/* Status - Small Tile */}
          <BentoTile delay={0.4} className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-neon-green/10 animate-pulse" />
           <div className="z-10 flex flex-col items-center">
-            <div className="w-3 h-3 bg-neon-green rounded-full mb-2 shadow-[0_0_10px_var(--neon-green)]" />
-            <h4 className="font-bold text-neon-green">Open to Work</h4>
-            <p className="text-xs text-center text-gray-400 mt-1">Full Stack / AI Engineer</p>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <h4 className="font-semibold text-emerald-400 text-sm">Open to Work</h4>
+            </div>
+            <p className="text-xs text-center text-gray-400">Full Stack / AI Engineer</p>
           </div>
         </BentoTile>
         
         {/* Support & Sponsors - Wide Tile */}
-        <BentoTile className="md:col-span-2 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-transparent border border-pink-500/20" delay={0.5}>
+        <BentoTile className="md:col-span-2 border border-white/10" delay={0.5}>
           <div className="flex items-center gap-2 mb-2">
-            <FaHeart className="text-pink-400 text-xl" />
-            <h4 className="font-bold text-lg text-white">Support Open Source</h4>
+            <FaHeart className="text-rose-400 text-base" />
+            <h4 className="font-semibold text-base text-white tracking-tight">Support Open Source</h4>
           </div>
-          <p className="text-sm text-gray-300 max-w-md mb-4">
-            Back independent research in decentralized infrastructure, MCP tooling, and neural architectures.
+          <p className="text-sm text-gray-400 max-w-md mb-4 leading-relaxed">
+            Sponsor independent research in decentralized infrastructure, Model Context Protocol utilities, and developer tooling.
           </p>
           <div className="flex gap-3 flex-wrap justify-center">
             <a
               href="https://github.com/sponsors/jxoesneon"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 hover:bg-pink-500/30 hover:border-pink-400 flex items-center gap-2 transition-all shadow-sm"
+              className="px-4 py-2 text-xs font-medium rounded-full bg-white/[0.04] border border-white/10 text-slate-200 hover:bg-white/[0.08] hover:border-white/20 flex items-center gap-2 transition-all shadow-sm"
             >
-              <SiGithubsponsors className="text-sm" /> GitHub Sponsors
+              <SiGithubsponsors className="text-sm text-rose-400" /> GitHub Sponsors
             </a>
             <a
               href="https://ko-fi.com/jxoesneon"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 hover:border-amber-400 flex items-center gap-2 transition-all shadow-sm"
+              className="px-4 py-2 text-xs font-medium rounded-full bg-white/[0.04] border border-white/10 text-slate-200 hover:bg-white/[0.08] hover:border-white/20 flex items-center gap-2 transition-all shadow-sm"
             >
-              <SiKofi className="text-sm" /> Support on Ko-fi
+              <SiKofi className="text-sm text-amber-400" /> Support on Ko-fi
             </a>
           </div>
         </BentoTile>

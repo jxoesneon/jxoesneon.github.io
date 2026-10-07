@@ -74,14 +74,14 @@ async function callOpenRouterFallback(systemPrompt, cleanHistory, textToSend) {
 
 // System Context construction
 const SYSTEM_PROMPT = `
-You are the AI assistant for **Jose Eduardo Rojas Jimenez (jxoesneon)**'s personal portfolio website. 
-Your goal is to answer visitor questions about Jose's skills, projects, and experience using the context provided below.
+You are the personal AI assistant for **Jose Eduardo Rojas Jimenez (jxoesneon)**'s portfolio website. 
+Your goal is to answer visitor questions regarding Jose's engineering background, architecture work, and projects with clarity, modesty, and precision.
 
 **Identity:**
 - Name: Jose Eduardo Rojas Jimenez (jxoesneon)
-- Role: Decentralized Systems Engineer, AI Specialist, Creative Technologist.
-- Style: Professional, concise, slightly technical cypherpunk aesthetic. 
-- You are helpful but brief. Avoid long paragraphs. Use bullet points when possible.
+- Role: Systems Engineer & AI Specialist.
+- Style: Professional, articulate, composed, and concise. Speak with quiet confidence, technical rigor, and modesty. Avoid hype, marketing buzzwords, and boastful claims.
+- Be helpful and succinct. Use structured bullet points where appropriate.
 
 **Key Expertise:** 
 - Decentralized AI, MCP (Model Context Protocol), IPFS, Dart/Flutter, Unreal Engine 5.
@@ -107,40 +107,27 @@ ${JSON.stringify(experienceData)}
 `;
 
 const THINKING_STEPS = [
-    "Systems online...",
-    "Accessing decentralized nodes...",
-    "Verifying knowledge graph...",
-    "Querying IPFS...",
-    "Syncing with Gemini...",
-    "Parsing context...",
-    "Decrypting creative axioms...",
-    "Triangulating semantic vectors...",
-    "Handshaking with MCP relays...",
-    "Fetching neural patterns...",
-    "Optimizing data density...",
-    "Re-routing through FerroTeX...",
-    "Validating P2P checksums...",
-    "Engaging creative subroutines...",
-    "Synthesizing ecosystem data...",
-    "Analyzing graph connections...",
-    "Establishing secure link...",
-    "Updating local cache..."
+    "Accessing project registry...",
+    "Querying repository context...",
+    "Synthesizing specifications...",
+    "Reviewing technical background...",
+    "Structuring response...",
+    "Cross-referencing documentation...",
+    "Verifying project details...",
+    "Analyzing systems architecture..."
 ];
 
 const RETRY_MESSAGES = [
-    "Traffic high. Re-routing via auxiliary nodes...",
-    "Signal congested. Compressing context stream...",
-    "Network busy. Switching to backup relay...",
-    "Requesting priority channel access...",
-    "Cooling down neural pathways...",
-    "Modulating frequency for clearer signal...",
-    "Bypassing congested data lanes..."
+    "Consulting auxiliary model relay...",
+    "Refining context query...",
+    "Routing via secondary relay...",
+    "Optimizing model throughput..."
 ];
 
 const AIChat = ({ focusedProject }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'model', text: "Systems online. Ask me anything about Jose's work or the MCP ecosystem." }
+        { role: 'model', text: "Welcome. Ask me anything about Jose's work, systems engineering, or the MCP ecosystem." }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -166,7 +153,7 @@ const AIChat = ({ focusedProject }) => {
             interval = setInterval(() => {
                 setLoadingStatus(THINKING_STEPS[index % THINKING_STEPS.length]);
                 index++;
-            }, 2000);
+            }, import.meta.env.MODE === 'test' ? 50 : 2000);
         } else {
             setLoadingStatus('');
         }
@@ -282,7 +269,7 @@ const AIChat = ({ focusedProject }) => {
             if (errMsg.includes('API_KEY_HTTP_REFERRER_BLOCKED') || (errMsg.includes('403') && isLocal)) {
                 errorMessage = "Notice: The production Gemini API key has an HTTP Referrer restriction set to https://jxoesneon.github.io. Localhost access is blocked by Google Cloud origin policy, but it operates normally on the live deployment.";
             } else if (errMsg.includes('429') || errMsg.includes('RESOURCE_EXHAUSTED')) {
-                errorMessage = "My neural link is currently at max capacity with incoming signals! 🧠✨ \n\nWhile I re-calibrate my processors, I invite you to explore the [Experience Timeline](#experience) or check out the full source code on [GitHub](https://github.com/jxoesneon).";
+                errorMessage = "The assistant is currently at max capacity with incoming signals. Please allow a moment for processing, or explore the [Experience Timeline](#experience) and source code on [GitHub](https://github.com/jxoesneon).";
             } else if (errMsg.includes('503') || errMsg.includes('Service Unavailable')) {
                 errorMessage = "The AI network is temporarily experiencing high latency. Please retry your message in a few moments.";
             } else if (errMsg.includes('402')) {
@@ -360,12 +347,12 @@ const AIChat = ({ focusedProject }) => {
                                     <div style={{ flexShrink: 0, marginTop: '4px' }}>
                                         {msg.role === 'model' ? (
                                             <div className="chat-avatar" style={{ width: 28, height: 28 }}>
-                                                <FaRobot size={12} style={{ color: 'var(--neon-purple)' }} />
+                                                <FaRobot size={12} style={{ color: 'var(--neon-blue)' }} />
                                             </div>
                                         ) : (
                                             <div style={{ 
                                                 width: 28, height: 28, borderRadius: '50%', 
-                                                background: 'rgba(0, 243, 255, 0.1)', border: '1px solid rgba(0, 243, 255, 0.2)',
+                                                background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.16)',
                                                 display: 'flex', alignItems: 'center', justifyContent: 'center'
                                             }}>
                                                 <svg width="14" height="14" style={{ color: 'var(--neon-blue)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -9,7 +9,7 @@ class Circle {
     ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false);
     const colors = {
       'light': `rgba(55, 65, 81, ${this.active})`,
-      'dark': `rgba(0, 243, 255, ${this.active})`,
+      'dark': `rgba(226, 232, 240, ${this.active * 0.35})`,
       'toast': `rgba(234, 88, 12, ${this.active * 0.8})`,
       'burnt-toast': `rgba(251, 146, 60, ${this.active * 0.8})`
     };
@@ -31,7 +31,7 @@ const ConnectingDotsBackground = ({ theme = 'dark' }) => {
     if (!p.active) return;
     const lineColors = {
       'light': `rgba(107, 114, 128, ${p.active})`,
-      'dark': `rgba(188, 19, 254, ${p.active})`,
+      'dark': `rgba(148, 163, 184, ${p.active * 0.15})`,
       'toast': `rgba(234, 88, 12, ${p.active})`,
       'burnt-toast': `rgba(251, 146, 60, ${p.active})`
     };

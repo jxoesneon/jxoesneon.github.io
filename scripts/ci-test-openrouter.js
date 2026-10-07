@@ -72,6 +72,7 @@ async function testChat(modelId) {
           { role: 'system', content: 'You are an AI assistant. Be concise.' },
           { role: 'user', content: 'Respond with exactly: "ACK: SYSTEM OPERATIONAL"' }
         ],
+        max_tokens: 1000,
         temperature: 0.1
       })
     });
@@ -96,17 +97,16 @@ async function testChat(modelId) {
 
 async function run() {
   await testAuth();
-  const freeModels = await getAvailableFreeModels();
+  await getAvailableFreeModels();
 
   console.log('\n--- [Step 3: Testing Chat Completions] ---');
   const candidateModels = [
-    'openrouter/auto',
-    'google/gemini-2.0-flash-lite-preview-02-05:free',
-    'google/gemini-2.0-flash-exp:free',
-    'meta-llama/llama-3.3-70b-instruct:free',
-    'deepseek/deepseek-r1:free',
-    'mistralai/mistral-small-24b-instruct-2501:free',
-    ...freeModels.slice(0, 5)
+    'nvidia/nemotron-3.5-lightning:free',
+    'google/gemma-4-31b-it:free',
+    'google/gemma-4-26b-a4b-it:free',
+    'apodex/apodex-1.1-mini:free',
+    'liquid/lfm-2.5-2.6b:free',
+    'openrouter/auto'
   ];
 
   // Deduplicate

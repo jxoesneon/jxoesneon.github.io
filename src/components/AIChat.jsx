@@ -29,9 +29,12 @@ async function callOpenRouterFallback(systemPrompt, cleanHistory, textToSend) {
     ];
 
     const models = [
-        "openrouter/auto",
-        "google/gemini-2.0-flash-lite-preview-02-05:free",
-        "meta-llama/llama-3.3-70b-instruct:free"
+        "nvidia/nemotron-3.5-lightning:free",
+        "google/gemma-4-31b-it:free",
+        "google/gemma-4-26b-a4b-it:free",
+        "apodex/apodex-1.1-mini:free",
+        "liquid/lfm-2.5-2.6b:free",
+        "openrouter/auto"
     ];
 
     let lastError = null;
@@ -47,7 +50,9 @@ async function callOpenRouterFallback(systemPrompt, cleanHistory, textToSend) {
                 },
                 body: JSON.stringify({
                     model: model,
-                    messages: messages
+                    messages: messages,
+                    max_tokens: 1200,
+                    temperature: 0.7
                 })
             });
 
@@ -190,7 +195,7 @@ const AIChat = ({ focusedProject }) => {
                 }
             });
 
-            let geminiError = null;
+            let _geminiError = null;
 
             // Tier 1: Google Gemini (Direct API)
             if (GEMINI_API_KEY) {
@@ -207,7 +212,7 @@ const AIChat = ({ focusedProject }) => {
                         setActiveModel(`Online • Gemini 2.5 Flash`);
                         return result.response.text();
                     } catch (error) {
-                        geminiError = error;
+                        _geminiError = error;
                         console.warn(`Gemini (${modelName}) failed:`, error.message);
                         if (error.message?.includes('404') || error.message?.includes('not found')) {
                             continue;
@@ -224,11 +229,15 @@ const AIChat = ({ focusedProject }) => {
 
             try {
                 const openRouterRes = await callOpenRouterFallback(systemPrompt, cleanHistory, textToSend);
-                setActiveModel(`Online • OpenRouter (${openRouterRes.modelName.includes('free') ? 'Free' : 'Auto'})`);
+                const displayModel = openRouterRes.modelName.includes('nemotron') ? 'Nemotron 3.5 (Free)' :
+                    openRouterRes.modelName.includes('gemma') ? 'Gemma 4 (Free)' :
+                    openRouterRes.modelName.includes('apodex') ? 'Apodex Mini (Free)' :
+                    openRouterRes.modelName.includes('free') ? 'OpenRouter (Free)' : 'OpenRouter (Auto)';
+                setActiveModel(`Online • ${displayModel}`);
                 return openRouterRes.text;
             } catch (openRouterError) {
                 console.error("OpenRouter fallback also failed:", openRouterError);
-                throw geminiError || openRouterError;
+                throw openRouterError;
             }
         };
 
@@ -263,9 +272,10 @@ const AIChat = ({ focusedProject }) => {
 
         } catch (error) {
             console.error("AI Error:", error);
-            let errorMessage = "Error: Connection interrupted. Please try again.";
             const errMsg = error.message || '';
             const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+            let errorMessage = "Notice: Neural link temporarily unavailable. Please retry in a moment, or reach out directly via email or LinkedIn.";
 
             if (errMsg.includes('API_KEY_HTTP_REFERRER_BLOCKED') || (errMsg.includes('403') && isLocal)) {
                 errorMessage = "Notice: The production Gemini API key has an HTTP Referrer restriction set to https://jxoesneon.github.io. Localhost access is blocked by Google Cloud origin policy, but it operates normally on the live deployment.";
@@ -273,6 +283,8 @@ const AIChat = ({ focusedProject }) => {
                 errorMessage = "My neural link is currently at max capacity with incoming signals! 🧠✨ \n\nWhile I re-calibrate my processors, I invite you to explore the [Experience Timeline](#experience) or check out the full source code on [GitHub](https://github.com/jxoesneon).";
             } else if (errMsg.includes('503') || errMsg.includes('Service Unavailable')) {
                 errorMessage = "The AI network is temporarily experiencing high latency. Please retry your message in a few moments.";
+            } else if (errMsg.includes('402')) {
+                errorMessage = "Notice: Upstream AI credit limit reached on this relay. Please retry in a few moments as capacity frees up.";
             }
 
             setMessages(prev => [...prev, { role: 'model', text: errorMessage }]);

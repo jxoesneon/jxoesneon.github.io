@@ -1,0 +1,26 @@
+name: Test OpenRouter AI Connection
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/ci-test-openrouter.js'
+      - '.github/workflows/test-ai.yml'
+
+jobs:
+  test-openrouter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify and Run OpenRouter CI Test
+        run: node scripts/ci-test-openrouter.js
+        env:
+          VITE_OPENROUTER_API_KEY: ${{ secrets.VITE_OPENROUTER_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
